@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lost & Found UMY</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // Konfigurasi warna UMY Custom
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        umygreen: '#347433', // Hijau UMY
+                        umyred: '#B22222',   // Merah UMY
+                        umygreenlight: '#4a8a49',
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+
+    <nav class="bg-white border-b shadow-sm">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <div class="flex items-center gap-2">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/4/45/Logo_UMY.png" alt="Logo UMY" class="h-12">
+                <div class="text-umygreen font-bold text-xl leading-tight">
+                    UNIVERSITAS <br> MUHAMMADIYAH <br> YOGYAKARTA
+                    <span class="text-red-600 ml-2">| LOST & FOUND</span>
+                </div>
+            </div>
+        </div>
+        
+        <div class="bg-umygreen text-white">
+            <div class="container mx-auto px-6 py-3 flex gap-8 text-sm font-semibold items-center">
+                <a href="/" class="hover:text-yellow-300">HOME</a>
+                <a href="#" class="hover:text-yellow-300">PROSEDUR</a>
+                <a href="#" class="hover:text-yellow-300">LIST BARANG TEMUAN</a>
+
+                <div class="relative group ml-auto">
+                    <button class="bg-white text-umygreen px-4 py-1 rounded flex items-center gap-2 focus:outline-none">
+                        LAYANAN MANDIRI
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" /></svg>
+                    </button>
+                    <div class="absolute right-0 mt-2 w-56 bg-white border rounded shadow-lg hidden group-hover:block text-gray-800 z-10">
+                        <a href="/form-kehilangan" class="block px-4 py-2 hover:bg-gray-100 border-b">Kehilangan Barang</a>
+                        <a href="/form-penemuan" class="block px-4 py-2 hover:bg-gray-100 border-b">Menemukan Barang</a>
+                        <a href="/riwayat" class="block px-4 py-2 hover:bg-gray-100">Riwayat Pelaporan</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container mx-auto px-6 py-12 flex flex-col md:flex-row items-center gap-12">
+        
+        <div class="md:w-1/2">
+            <h1 class="text-2xl font-bold mb-4 text-gray-800">Apa itu Lost & Found UMY?</h1>
+            <div class="flex items-center gap-4 mb-6">
+                <div class="font-black text-6xl text-gray-800 tracking-tighter">
+                    L<span class="text-umygreen">O</span>ST<span class="text-yellow-500">&</span><br>
+                    F<span class="text-umyred">O</span>UND
+                </div>
+            </div>
+            <p class="text-gray-600 mb-6 leading-relaxed">
+                Lost & Found UMY adalah platform web terpadu yang didedikasikan untuk membantu seluruh civitas akademika Universitas Muhammadiyah Yogyakarta. Kami hadir untuk mengelola seluruh alur penanganan barang temuan secara resmi, terstruktur, dan aman.
+            </p>
+
+            <div class="flex gap-4">
+                <a href="/form-kehilangan" class="bg-umyred hover:bg-red-800 text-white font-bold py-3 px-6 rounded shadow-lg transition transform hover:-translate-y-1">
+                    Anda Kehilangan Barang?
+                </a>
+                
+                <a href="/form-penemuan" class="bg-umygreen hover:bg-green-800 text-white font-bold py-3 px-6 rounded shadow-lg transition transform hover:-translate-y-1">
+                    Anda Menemukan Barang?
+                </a>
+            </div>
+        </div>
+
+        <div class="md:w-1/2">
+            <img src="https://lh3.googleusercontent.com/p/AF1QipNqYlX4zFz5_jB_QZzZ5zZ5zZ5zZ5zZ5zZ5zZ5z" alt="Gedung UMY" class="rounded-lg shadow-xl w-full object-cover h-80">
+        </div>
+    </div>
+
+    <footer class="bg-umygreen text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center text-sm">
+            &copy; 2025 Lost & Found Universitas Muhammadiyah Yogyakarta
+        </div>
+    </footer>
+
+</body>
+</html>

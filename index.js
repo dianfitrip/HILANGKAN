@@ -30,7 +30,14 @@ app.get('/riwayat', (req, res) => {
   res.send('Nanti ini halaman Riwayat Laporan');
 });
 
+// 5. Halaman Prosedur
+app.get('/prosedur', (req, res) => {
+    res.render('prosedur'); // Akan membuka file views/prosedur.ejs
+});
+
 // Jalankan Server
 app.listen(port, () => {
   console.log(`Web berjalan di http://localhost:${port}`);
 });
+
+

@@ -15,14 +15,13 @@
                         umygreen: '#347433', 
                         umyred: '#B22222',   
                         umygreenlight: '#4a8a49',
-                        umyfooter: '#2d662c', // Hijau sedikit lebih gelap utk footer
+                        umyfooter: '#2d662c',
                     }
                 }
             }
         }
     </script>
     <style>
-        /* Trik CSS untuk mengubah logo berwarna menjadi putih bersih */
         .filter-white {
             filter: brightness(0) invert(1);
         }
@@ -30,41 +29,60 @@
 </head>
 <body class="bg-gray-50 font-sans flex flex-col min-h-screen">
 
-    <nav class="bg-white border-b shadow-sm relative z-20">
+    <nav class="bg-white border-b shadow-sm relative z-30">
         <div class="container mx-auto px-6 py-4 flex justify-between items-center">
-            <div class="flex items-center gap-3">
+            
+            <div class="flex items-center gap-4">
                 <img src="/images/LogoUMY.png" alt="Logo UMY" class="h-14">
-                <div class="text-umygreen font-bold text-xl leading-tight">
-                    UNIVERSITAS <br> MUHAMMADIYAH <br> YOGYAKARTA
-                    <span class="text-red-600 ml-2 font-black">| LOST & FOUND</span>
-                </div>
-            </div>
-        </div>
-        
-        <div class="bg-umygreen text-white shadow-md">
-            <div class="container mx-auto px-6 py-3 flex justify-center items-center gap-10 text-sm font-bold tracking-wide">
-                <a href="/" class="hover:text-yellow-300 transition">HOME</a>
-                <a href="#" class="hover:text-yellow-300 transition">PROSEDUR</a>
-                <a href="#" class="hover:text-yellow-300 transition">LIST BARANG TEMUAN</a>
-
-                <div class="relative group">
-                    <button class="flex items-center gap-1 hover:text-yellow-300 focus:outline-none transition">
-                        LAYANAN MANDIRI
-                        <i class="ri-arrow-down-s-line"></i>
-                    </button>
-                    <div class="absolute left-0 mt-3 w-56 bg-white border rounded-md shadow-xl hidden group-hover:block text-gray-800 z-50 overflow-hidden animate-fade-in-down">
-                        <a href="/form-kehilangan" class="block px-4 py-3 hover:bg-gray-100 border-b text-sm font-normal">Kehilangan Barang</a>
-                        <a href="/form-penemuan" class="block px-4 py-3 hover:bg-gray-100 border-b text-sm font-normal">Menemukan Barang</a>
-                        <a href="/riwayat" class="block px-4 py-3 hover:bg-gray-100 text-sm font-normal">Riwayat Laporan</a>
+                
+                <div class="flex items-center gap-4">
+                    <div class="text-umygreen font-bold text-xs md:text-sm leading-tight text-right hidden md:block">
+                        UNIVERSITAS <br> MUHAMMADIYAH <br> YOGYAKARTA
+                    </div>
+                    
+                    <div class="h-10 w-0.5 bg-gray-300 hidden md:block"></div>
+                    
+                    <div class="text-red-600 font-black text-xl md:text-2xl tracking-tighter">
+                        LOST & FOUND
                     </div>
                 </div>
             </div>
+
+        </div>
+        
+        <div class="bg-umygreen text-white shadow-md relative z-20">
+            <div class="container mx-auto px-6 py-3 flex justify-center items-center gap-8 text-sm font-bold tracking-wide">
+                <a href="/" class="hover:text-yellow-300 transition py-2">HOME</a>
+                <a href="#" class="hover:text-yellow-300 transition py-2">PROSEDUR</a>
+                <a href="#" class="hover:text-yellow-300 transition py-2">LIST BARANG TEMUAN</a>
+
+                <div class="relative group">
+                    <button class="bg-white text-umygreen hover:bg-gray-100 transition px-4 py-2 rounded shadow-sm flex items-center gap-2 focus:outline-none">
+                        LAYANAN MANDIRI
+                        <i class="ri-arrow-down-s-line text-lg"></i>
+                    </button>
+
+                    <div class="absolute right-0 top-full pt-2 w-56 hidden group-hover:block z-50">
+                        <div class="bg-white border rounded-md shadow-xl overflow-hidden text-gray-800">
+                            <a href="/form-kehilangan" class="block px-4 py-3 hover:bg-gray-100 border-b text-sm font-normal transition">
+                                <i class="ri-search-line mr-2 text-umyred"></i> Kehilangan Barang
+                            </a>
+                            <a href="/form-penemuan" class="block px-4 py-3 hover:bg-gray-100 border-b text-sm font-normal transition">
+                                <i class="ri-hand-heart-line mr-2 text-umygreen"></i> Menemukan Barang
+                            </a>
+                            <a href="/riwayat" class="block px-4 py-3 hover:bg-gray-100 text-sm font-normal transition">
+                                <i class="ri-history-line mr-2 text-gray-500"></i> Riwayat Laporan
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                </div>
         </div>
     </nav>
 
     <div class="relative w-full h-[400px] md:h-[500px]">
         <img src="/images/potoUMY.jpeg" alt="Gedung UMY" class="w-full h-full object-cover">
-        <div class="absoluteKf inset-0 bg-black/30"></div>
+        <div class="absolute inset-0 bg-black/30"></div>
     </div>
 
     <main class="flex-grow container mx-auto px-6 py-16">

@@ -1,0 +1,303 @@
+<%- include('partials/header', { title: "Form Penemuan | Lost & Found UMY", activePage: "layanan-mandiri" }) %>
+
+<div class="bg-umygreen text-white py-8">
+    <div class="container mx-auto px-6">
+        <h1 class="text-3xl font-bold">Lapor Penemuan Barang</h1>
+        <p class="text-yellow-300 mt-2">Terima kasih telah berbaik hati melaporkan barang yang Anda temukan.</p>
+    </div>
+</div>
+
+<main class="container mx-auto px-6 py-10 max-w-4xl">
+    
+    <div class="bg-white p-8 rounded-lg shadow-lg border border-gray-200">
+        
+        <form action="/submit-penemuan" method="POST" enctype="multipart/form-data">
+            
+            <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2">Identitas Penemu</h2>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Nama* <span class="font-normal text-sm text-gray-500">(Hanya huruf, max 50 karakter)</span></label>
+                <input type="text" name="reporter_name" required maxlength="50" 
+                    oninput="this.value = this.value.replace(/[^a-zA-Z\s]/g, '')"
+                    class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen transition"
+                    placeholder="Masukkan nama lengkap Anda">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Status Pelapor*</label>
+                <div class="bg-gray-100 p-4 rounded border border-gray-300 grid grid-cols-1 md:grid-cols-2 gap-4">
+                    
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="reporter_status" value="mahasiswa" class="form-radio text-umygreen h-5 w-5" checked onchange="updateIdentityRules()">
+                        <span>Mahasiswa</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="reporter_status" value="dosen" class="form-radio text-umygreen h-5 w-5" onchange="updateIdentityRules()">
+                        <span>Dosen</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="reporter_status" value="tendik" class="form-radio text-umygreen h-5 w-5" onchange="updateIdentityRules()">
+                        <span>Tenaga Kependidikan</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="reporter_status" value="foreign_student" class="form-radio text-umygreen h-5 w-5" onchange="updateIdentityRules()">
+                        <span>Foreign Student</span>
+                    </label>
+
+                    <label class="flex items-center space-x-3 cursor-pointer">
+                        <input type="radio" name="reporter_status" value="lainnya" class="form-radio text-umygreen h-5 w-5" onchange="updateIdentityRules()">
+                        <span>Lainnya (Umum/Tamu)</span>
+                    </label>
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label id="label-identitas" class="block text-gray-700 font-bold mb-2">NIM*</label>
+                <input type="text" name="identification_number" id="input-identitas" required
+                    class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen transition"
+                    placeholder="Masukkan Nomor Induk Mahasiswa Anda">
+            </div>
+
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2 pt-4">Data Barang Temuan</h2>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Kategori Barang*</label>
+                <div class="relative">
+                    <select name="category_id" required class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 appearance-none focus:outline-none focus:bg-white focus:border-umygreen cursor-pointer">
+                        <option value="" disabled selected>Pilih Kategori Barang</option>
+                        <% categories.forEach(function(cat) { %>
+                            <option value="<%= cat.id %>"><%= cat.name %></option>
+                        <% }); %>
+                    </select>
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center px-4 text-gray-700">
+                        <i class="ri-arrow-down-s-line"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Nama Barang* <span class="font-normal text-sm text-gray-500">(Max 100 karakter)</span></label>
+                <input type="text" name="item_name" required maxlength="100"
+                    class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen"
+                    placeholder="Contoh: Dompet kulit coklat, HP Samsung A51">
+            </div>
+
+            <div class="mb-6">
+                <label class="block text-gray-700 font-bold mb-2">Deskripsi Detail*</label>
+                <textarea name="description" rows="4" required
+                    class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen"
+                    placeholder="Jelaskan ciri-ciri khusus barang. Contoh: Ada stiker UMY di belakang, gantungan kunci bentuk kucing, dll."></textarea>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">Tanggal Ditemukan*</label>
+                    <input type="date" name="date_event" required
+                        class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen">
+                </div>
+                <div>
+                    <label class="block text-gray-700 font-bold mb-2">Lokasi Penemuan*</label>
+                    <input type="text" name="location" required
+                        class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen"
+                        placeholder="Contoh: Gedung AR Fachruddin B lt.2">
+                </div>
+            </div>
+
+            <div class="mb-8">
+                <label class="block text-gray-700 font-bold mb-2">Foto Barang (Opsional)</label>
+                <div class="flex items-center justify-center w-full">
+                    <label for="dropzone-file" class="flex flex-col items-center justify-center w-full h-48 border-2 border-gray-300 border-dashed rounded-lg cursor-pointer bg-gray-50 hover:bg-gray-100 transition overflow-hidden relative">
+                        <div id="upload-placeholder" class="flex flex-col items-center justify-center pt-5 pb-6">
+                            <i class="ri-upload-cloud-2-line text-3xl text-gray-400 mb-2"></i>
+                            <p class="text-sm text-gray-500"><span class="font-semibold">Klik untuk unggah</span> atau seret foto ke sini</p>
+                            <p class="text-xs text-gray-400 mt-1">PNG, JPG, JPEG (Max. 2MB)</p>
+                        </div>
+                        <img id="image-preview" src="#" alt="Preview" class="hidden w-full h-full object-contain absolute inset-0 bg-white p-2">
+                        <input id="dropzone-file" name="item_image" type="file" class="hidden" accept="image/*" onchange="previewImage(event)" />
+                    </label>
+                </div>
+            </div>
+
+
+            <h2 class="text-xl font-bold text-gray-800 mb-6 border-b pb-2 pt-4">Verifikasi Laporan</h2>
+
+            <div class="mb-4">
+                <label class="block text-gray-700 font-bold mb-2">Email Aktif* <span class="font-normal text-sm text-gray-500">(Wajib @gmail.com)</span></label>
+                <div class="flex flex-col md:flex-row gap-2">
+                    <input type="email" id="input-email" name="reporter_email" required
+                        class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen"
+                        placeholder="email@gmail.com">
+                    
+                    <button type="button" onclick="validateEmail()"
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-3 px-4 rounded border border-gray-300 transition whitespace-nowrap">
+                        Kirim Kode
+                    </button>
+                </div>
+                <p id="email-error-msg" class="text-red-600 text-sm font-bold mt-2 hidden"></p>
+                <p id="email-success-msg" class="text-green-600 text-sm font-bold mt-2 hidden"></p>
+            </div>
+
+            <div class="mb-10">
+                <label class="block text-gray-700 font-bold mb-2">Kode OTP</label>
+                <div class="flex gap-2">
+                    <input type="text" id="input-otp" name="otp_code" maxlength="6" 
+                        oninput="this.value = this.value.replace(/[^0-9]/g, '')"
+                        class="w-full bg-gray-100 border border-gray-300 rounded px-4 py-3 focus:outline-none focus:bg-white focus:border-umygreen"
+                        placeholder="Masukkan kode 6 digit">
+                    
+                    <button type="button" onclick="cekKodeOtp()"
+                        class="bg-gray-200 hover:bg-gray-300 text-gray-700 font-bold py-2 px-4 rounded border border-gray-300 transition whitespace-nowrap">
+                        Verifikasi
+                    </button>
+                </div>
+                <p id="otp-msg" class="text-sm font-bold mt-2 hidden"></p>
+            </div>
+
+            <div class="flex flex-col-reverse md:flex-row justify-end gap-4">
+                <a href="/" class="text-center w-full md:w-auto bg-red-700 hover:bg-red-800 text-white font-bold py-3 px-8 rounded shadow transition">
+                    Batal
+                </a>
+                <button type="submit" class="w-full md:w-auto bg-yellow-400 hover:bg-yellow-500 text-gray-900 font-bold py-3 px-8 rounded shadow transition">
+                    Laporkan Penemuan
+                </button>
+            </div>
+
+        </form>
+    </div>
+</main>
+
+<script>
+    // 1. Validasi Identitas
+    function updateIdentityRules() {
+        const status = document.querySelector('input[name="reporter_status"]:checked').value;
+        const label = document.getElementById('label-identitas');
+        const input = document.getElementById('input-identitas');
+
+        input.value = ""; 
+        input.removeAttribute('maxlength');
+        input.removeAttribute('oninput');
+
+        if (status === 'mahasiswa') {
+            label.innerText = 'NIM* (11 Digit Angka)';
+            input.placeholder = 'Contoh: 20210140001';
+            input.maxLength = 11;
+            input.setAttribute('oninput', "this.value = this.value.replace(/[^0-9]/g, '')");
+        } else if (status === 'dosen' || status === 'tendik') {
+            label.innerText = 'NIP / NIK*';
+            input.placeholder = 'Masukkan Nomor Induk Pegawai';
+            input.maxLength = 20;
+            input.setAttribute('oninput', "this.value = this.value.replace(/[^0-9]/g, '')");
+        } else if (status === 'foreign_student') {
+            label.innerText = 'Passport Number*';
+            input.placeholder = 'Enter your Passport Number';
+            input.maxLength = 20;
+        } else {
+            label.innerText = 'Nomor KTP / NIK* (16 Digit)';
+            input.placeholder = 'Masukkan 16 digit NIK KTP';
+            input.maxLength = 16;
+            input.setAttribute('oninput', "this.value = this.value.replace(/[^0-9]/g, '')");
+        }
+    }
+
+    // 2. Kirim Kode OTP
+    function validateEmail() {
+        const emailInput = document.getElementById('input-email');
+        const errorMsg = document.getElementById('email-error-msg');
+        const successMsg = document.getElementById('email-success-msg');
+        const email = emailInput.value;
+        const gmailRegex = /.+@gmail\.com$/;
+
+        errorMsg.classList.add('hidden');
+        successMsg.classList.add('hidden');
+        emailInput.classList.remove('border-red-500', 'border-green-500');
+
+        if (!gmailRegex.test(email)) {
+            errorMsg.innerText = "Error: Email wajib menggunakan @gmail.com!";
+            errorMsg.classList.remove('hidden');
+            emailInput.classList.add('border-red-500');
+            return;
+        }
+
+        fetch('/api/send-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email })
+        })
+        .then(res => res.json())
+        .then(data => {
+            if (data.success) {
+                successMsg.innerHTML = `Kode terkirim! <br>Cek Terminal VS Code: <b>${data.debug_otp}</b>`;
+                successMsg.classList.remove('hidden');
+                emailInput.classList.add('border-green-500');
+            } else {
+                errorMsg.innerText = "Gagal: " + data.message;
+                errorMsg.classList.remove('hidden');
+            }
+        })
+        .catch(err => console.error(err));
+    }
+
+    // 3. Cek OTP (Fungsi Baru untuk Tombol Verifikasi)
+    function cekKodeOtp() {
+        const email = document.getElementById('input-email').value;
+        const otp = document.getElementById('input-otp').value;
+        const msg = document.getElementById('otp-msg');
+        const inputOtp = document.getElementById('input-otp');
+
+        if(!email || !otp) {
+            alert("Harap isi Email dan Kode OTP terlebih dahulu!");
+            return;
+        }
+
+        fetch('/api/verify-otp', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email: email, otp_code: otp })
+        })
+        .then(res => res.json())
+        .then(data => {
+            msg.classList.remove('hidden', 'text-red-600', 'text-green-600');
+            
+            if (data.success) {
+                // Jika Benar
+                msg.innerText = "✅ Kode Valid! Silakan lanjutkan laporan.";
+                msg.classList.add('text-green-600');
+                inputOtp.classList.add('border-green-500', 'bg-green-50');
+                inputOtp.classList.remove('border-red-500');
+            } else {
+                // Jika Salah
+                msg.innerText = "❌ " + data.message;
+                msg.classList.add('text-red-600');
+                inputOtp.classList.add('border-red-500');
+            }
+        })
+        .catch(err => console.error(err));
+    }
+
+    // 4. Preview Gambar
+    function previewImage(event) {
+        const input = event.target;
+        const preview = document.getElementById('image-preview');
+        const placeholder = document.getElementById('upload-placeholder');
+        
+        if (input.files && input.files[0]) {
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                preview.src = e.target.result;
+                preview.classList.remove('hidden');
+                placeholder.classList.add('hidden');
+            }
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+
+    document.addEventListener("DOMContentLoaded", function() {
+        updateIdentityRules();
+    });
+</script>
+
+<%- include('partials/footer') %>

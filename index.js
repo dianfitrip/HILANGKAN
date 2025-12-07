@@ -7,11 +7,12 @@ const app = express();
 const port = 3000;
 
 // --- 1. KONFIGURASI DATABASE MYSQL ---
+// --- 1. KONFIGURASI DATABASE MYSQL ---
 const db = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',      // Sesuaikan dengan user database Anda (default: root)
-    password: 'Df999999999999.',      // Sesuaikan dengan password database Anda
-    database: 'db_lostfound'
+    host: process.env.DB_HOST,
+    user: process.env.DB_USER,
+    password: process.env.DB_PASSWORD, // Ini akan ambil dari file .env
+    database: process.env.DB_NAME
 });
 
 db.connect((err) => {

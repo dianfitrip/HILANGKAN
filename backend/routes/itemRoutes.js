@@ -1,6 +1,6 @@
 const express = require('express');
 const router = express.Router();
-const itemController = require('../controllers/itemController'); // Pastikan path ini benar
+const itemController = require('../controllers/itemcontroller'); // Pastikan path ini benar
 const multer = require('multer');
 const path = require('path'); // Biarkan jika nanti butuh path.extname
 

@@ -10,19 +10,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/prosedur" element={<ProsedurPage />} />
-        {/* Route lain akan ditambahkan nanti */}
-      </Routes>
-    </Router>
-  );
-}
-
-function App() {
-  return (
-    <Router>
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-        <Route path="/prosedur" element={<ProsedurPage />} />
-        <Route path="/lapor-penemuan" element={<FormPenemuanPage />} /> {/* <-- Tambah ini */}
+        <Route path="/lapor-penemuan" element={<FormPenemuanPage />} />
       </Routes>
     </Router>
   );

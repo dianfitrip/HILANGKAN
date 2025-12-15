@@ -1,17 +1,27 @@
 import React, { useState, useEffect } from 'react';
 import Navbar from '../components/Navbar';
-import Footer from '../components/footer';
-import { Search } from 'lucide-react'; // Icon library
+import Footer from '../components/Footer'; // <-- PERBAIKAN 1: Huruf 'F' Besar
+import { Search } from 'lucide-react'; 
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
 
-  // Fetch data barang terbaru dari Backend API
   useEffect(() => {
     fetch('http://localhost:3000/api/items/recent')
       .then(res => res.json())
-      .then(data => setItems(data))
-      .catch(err => console.error("Gagal ambil data:", err));
+      .then(data => {
+        // PERBAIKAN 2: Cek apakah data berupa Array sebelum di-set
+        if (Array.isArray(data)) {
+          setItems(data);
+        } else {
+          console.error("Format data salah atau backend error:", data);
+          setItems([]); // Set kosong biar tidak crash
+        }
+      })
+      .catch(err => {
+        console.error("Gagal ambil data:", err);
+        setItems([]);
+      });
   }, []);
 
   return (
@@ -29,7 +39,6 @@ const HomePage = () => {
             atau menemukan barang yang tertinggal di area kampus.
           </p>
           
-          {/* Search Bar */}
           <div className="flex max-w-xl mx-auto bg-white rounded-full overflow-hidden shadow-lg p-1">
             <input 
               type="text" 
@@ -42,8 +51,7 @@ const HomePage = () => {
           </div>
         </div>
         
-        {/* Background Overlay Image (Opsional) */}
-        <div className="absolute inset-0 opacity-20 bg-[url('/images/potoUMY.jpeg')] bg-cover bg-center mix-blend-overlay"></div>
+        {/* Hapus background image dulu jika bikin error, atau pastikan filenya ada */}
       </div>
 
       {/* BARANG TERBARU SECTION */}
@@ -53,7 +61,10 @@ const HomePage = () => {
         </h2>
 
         {items.length === 0 ? (
-          <p className="text-center text-gray-500 py-10">Belum ada data barang terbaru.</p>
+          <p className="text-center text-gray-500 py-10">
+            Belum ada data barang terbaru. 
+            <br/><span className="text-sm">(Pastikan Backend jalan dan Database terhubung)</span>
+          </p>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
             {items.map((item) => (

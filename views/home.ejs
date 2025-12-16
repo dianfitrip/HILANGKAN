@@ -1,0 +1,62 @@
+<%- include('partials/header', { title: "Beranda | Lost & Found UMY", activePage: "home" }) %>
+
+<div class="relative w-full h-[300px] md:h-[400px]">
+    <img src="/images/potoUMY.jpeg" alt="Hero UMY" class="w-full h-full object-cover">
+    <div class="absolute inset-0 bg-black/40"></div>
+    <div class="absolute inset-0 flex items-center justify-center">
+        
+    </div>
+</div>
+
+<main class="flex-grow container mx-auto px-6 py-16">
+    <div class="max-w-6xl mx-auto flex flex-col md:flex-row items-center gap-12 md:gap-20 mb-16">
+        
+        <div class="md:w-5/12 flex flex-col items-center md:items-start text-center md:text-left">
+            <h2 class="text-3xl md:text-4xl font-bold text-gray-800 mb-6">Apa itu Lost & Found UMY?</h2>
+            <img src="/images/LogoLostFound.png" alt="Logo Lost Found" class="w-72 md:w-96 drop-shadow-lg">
+        </div>
+
+        <div class="md:w-7/12 flex flex-col text-center md:text-left">
+            <p class="text-gray-600 mb-8 leading-relaxed text-lg">
+                Lost & Found UMY adalah platform web terpadu yang membantu seluruh civitas akademika Universitas Muhammadiyah Yogyakarta dalam pelaporan, pencarian, dan pengembalian barang hilang atau ditemukan di area kampus.
+                <br><br>
+                Sistem ini mengelola alur barang temuan secara resmi, mulai dari pelaporan hingga verifikasi pengambilan untuk memastikan proses yang aman dan terstruktur.
+            </p>
+
+            <div class="flex flex-col sm:flex-row justify-center md:justify-start gap-4">
+                <a href="/form-kehilangan" class="bg-umyred hover:bg-red-800 text-white font-bold py-3 px-8 rounded shadow-lg transition transform hover:-translate-y-1 text-center">
+                    Anda Kehilangan Barang?
+                </a>
+                
+                <a href="/form-penemuan" class="bg-umygreen hover:bg-green-800 text-white font-bold py-3 px-8 rounded shadow-lg transition transform hover:-translate-y-1 text-center">
+                    Anda Menemukan Barang?
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto mt-10 mb-10">
+        <div class="bg-red-50 border-l-8 border-red-500 rounded-r-xl shadow-sm p-8 flex flex-col md:flex-row items-start md:items-center gap-6">
+            <div class="hidden md:flex bg-red-100 p-5 rounded-full flex-shrink-0 animate-pulse">
+                <i class="ri-alarm-warning-fill text-5xl text-red-600"></i>
+            </div>
+            <div class="flex-grow">
+                <h3 class="text-2xl font-bold text-red-700 mb-3 flex items-center gap-2">
+                    <i class="ri-alarm-warning-fill md:hidden"></i> 
+                    WASPADA PENIPUAN!
+                </h3>
+                <p class="text-gray-800 text-lg leading-relaxed mb-4">
+                    Seluruh layanan Lost & Found Universitas Muhammadiyah Yogyakarta adalah 
+                    <span class="font-black text-white bg-red-600 px-2 py-0.5 rounded shadow-sm">100% GRATIS</span>.
+                    Kami tidak pernah meminta biaya administrasi, biaya transfer, atau imbalan uang tebusan dalam bentuk apapun untuk pengembalian barang.
+                </p>
+                <div class="flex items-center gap-2 text-red-700 font-bold italic bg-red-100 p-3 rounded-lg inline-block">
+                    <i class="ri-shield-check-line text-xl"></i>
+                    <span>Abaikan pihak yang meminta transfer uang mengatasnamakan UMY!</span>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+<%- include('partials/footer') %>

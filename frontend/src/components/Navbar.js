@@ -1,26 +1,96 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useState } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { ChevronDown } from "lucide-react";
+import "./Navbar.css";
 
 const Navbar = () => {
-  return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
-      <div className="container mx-auto px-6 py-3 flex justify-between items-center">
-        {/* LOGO AREA */}
-        <Link to="/" className="flex items-center gap-3">
-            {/* Pastikan file ini ada di frontend/public/images/ */}
-            <img src="/images/LogoUMY.png" alt="Logo UMY" className="h-10" />
-            <div className="w-px h-8 bg-gray-300 mx-2"></div>
-            <img src="/images/LogoLostFound.png" alt="Logo LostFound" className="h-10" />
-        </Link>
+  const location = useLocation();
+  const [isDropdownOpen, setIsDropdownOpen] = useState(false);
 
-        {/* MENU LINKS */}
-        <div className="hidden md:flex items-center gap-8 font-medium text-gray-700">
-          <Link to="/" className="hover:text-green-700 transition">Beranda</Link>
-          <Link to="/prosedur" className="hover:text-green-700 transition">Prosedur</Link>
-          <Link to="/list" className="hover:text-green-700 transition">Barang Temuan</Link>
-          <Link to="/login" className="px-5 py-2 bg-green-700 text-white rounded-full hover:bg-green-800 transition">
-            Masuk
-          </Link>
+  const isActive = (path) => location.pathname === path;
+
+  return (
+    <nav className="navbar">
+      {/* ===== TOP BAR (LOGO KIRI) ===== */}
+      <div className="navbar-top">
+        <div className="logo-container">
+          <img src="/images/LogoUMY.png" alt="UMY" className="logo-image" />
+          <div className="logo-divider"></div>
+          <img
+            src="/images/LogoLostFound.png"
+            alt="Lost & Found"
+            className="logo-image"
+          />
+        </div>
+      </div>
+
+      {/* ===== BOTTOM BAR (MENU) ===== */}
+      <div className="navbar-bottom">
+        <div className="navbar-container">
+          <ul className="nav-menu">
+            <li>
+              <Link
+                to="/"
+                className={`nav-link ${isActive("/") ? "active" : ""}`}
+              >
+                HOME
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/prosedur"
+                className={`nav-link ${isActive("/prosedur") ? "active" : ""}`}
+              >
+                PROSEDUR
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/list"
+                className={`nav-link ${isActive("/list") ? "active" : ""}`}
+              >
+                LIST BARANG TEMUAN
+              </Link>
+            </li>
+
+            {/* ===== DROPDOWN ===== */}
+            <li
+              className="dropdown-container"
+              onMouseEnter={() => setIsDropdownOpen(true)}
+              onMouseLeave={() => setIsDropdownOpen(false)}
+            >
+              <div
+                className={`dropdown-trigger-box ${
+                  isDropdownOpen || location.pathname.includes("/lapor")
+                    ? "active"
+                    : ""
+                }`}
+              >
+                <span>LAYANAN MANDIRI</span>
+                <ChevronDown
+                  size={16}
+                  className={`dropdown-icon ${
+                    isDropdownOpen ? "rotate" : ""
+                  }`}
+                />
+              </div>
+
+              <ul className={`dropdown-menu ${isDropdownOpen ? "show" : ""}`}>
+                <li>
+                  <Link to="/lapor-kehilangan" className="dropdown-item">
+                    Laporkan Kehilangan
+                  </Link>
+                </li>
+                <li>
+                  <Link to="/lapor-penemuan" className="dropdown-item">
+                    Laporkan Penemuan
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          </ul>
         </div>
       </div>
     </nav>

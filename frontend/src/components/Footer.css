@@ -1,0 +1,108 @@
+.footer {
+  background-color: #347433;
+  color: #ffffff;
+
+  /* DIPERKECIL */
+  padding-top: 40px;
+  padding-bottom: 10px;
+
+  border-top: 4px solid #FFC107;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== CONTAINER ===== */
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 60px; /* dipersempit */
+  align-items: start;
+}
+
+/* ===== SECTION ===== */
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+/* ===== LOGO ===== */
+.footer-logo-section {
+  align-items: center;
+}
+
+.footer-logo {
+  height: 130px; /* DIPERKECIL (sebelumnya 180px) */
+  filter: brightness(0) invert(1);
+}
+
+/* ===== TITLE ===== */
+.section-title {
+  color: #FFC107;
+  font-size: 16px; /* lebih kecil */
+  font-weight: 700;
+  margin-bottom: 18px; /* dipersempit */
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* ===== CONTACT & HOURS ===== */
+.contact-row,
+.hours-row {
+  display: grid;
+  grid-template-columns: auto 10px 1fr;
+  gap: 8px;
+  margin-bottom: 8px; /* jarak diperkecil */
+}
+
+.contact-label,
+.hours-label {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.contact-colon,
+.hours-colon {
+  font-weight: 600;
+}
+
+.contact-value,
+.hours-value {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+/* ===== FULL WIDTH DIVIDER ===== */
+.footer-divider-full {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin: 30px 0 12px; /* diperkecil */
+}
+
+/* ===== COPYRIGHT ===== */
+.footer-bottom {
+  text-align: center;
+  font-size: 12px; /* lebih kecil */
+  color: rgba(255, 255, 255, 0.75);
+  padding-bottom: 12px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-logo-section {
+    align-items: flex-start;
+  }
+
+  .footer-logo {
+    height: 110px;
+  }
+}

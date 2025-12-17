@@ -1,26 +1,88 @@
-import React from 'react';
+import React from "react";
+import "./Footer.css";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-900 text-white mt-auto pt-10 pb-6">
-      <div className="container mx-auto px-6">
-        <div className="flex flex-col md:flex-row justify-between items-center mb-6">
-          <div className="flex items-center gap-4 mb-4 md:mb-0">
-            <img src="/images/footerlogo.png" alt="Logo Footer" className="h-12 brightness-0 invert" />
-            <div>
-              <h3 className="font-bold text-lg">Lost & Found</h3>
-              <p className="text-gray-400 text-sm">Universitas Muhammadiyah Yogyakarta</p>
+    <footer className="footer">
+      <div className="footer-container">
+
+        {/* LOGO */}
+        <div className="footer-section footer-logo-section">
+          <img
+            src="/images/footerlogo.png"
+            alt="UMY Logo"
+            className="footer-logo"
+          />
+        </div>
+
+        {/* SEKRETARIAT */}
+        <div className="footer-section footer-info">
+          <h3 className="section-title">Sekretariat</h3>
+
+          <div className="contact-table">
+            <div className="contact-row">
+              <span className="contact-label">Alamat</span>
+              <span className="contact-colon">:</span>
+              <span className="contact-value">
+                Jl. Brawijaya, Bantul 55183
+              </span>
+            </div>
+
+            <div className="contact-row">
+              <span className="contact-label">Email</span>
+              <span className="contact-colon">:</span>
+              <span className="contact-value">lost&found@umy.ac.id</span>
+            </div>
+
+            <div className="contact-row">
+              <span className="contact-label">Telp.</span>
+              <span className="contact-colon">:</span>
+              <span className="contact-value">
+                0274.387656 psw 140/141/149/492
+              </span>
+            </div>
+
+            <div className="contact-row">
+              <span className="contact-label">Faks</span>
+              <span className="contact-colon">:</span>
+              <span className="contact-value">0274.387646</span>
+            </div>
+
+            <div className="contact-row">
+              <span className="contact-label">NPP</span>
+              <span className="contact-colon">:</span>
+              <span className="contact-value">340216202000002</span>
             </div>
           </div>
-          <div className="text-gray-400 text-sm text-center md:text-right">
-            <p>Jl. Brawijaya, Kasihan, Bantul, Yogyakarta</p>
-            <p>Email: support@umy.ac.id</p>
+        </div>
+
+        {/* JAM LAYANAN */}
+        <div className="footer-section footer-info">
+          <h3 className="section-title">Jam Layanan</h3>
+
+          <div className="hours-table">
+            <div className="hours-row">
+              <span className="hours-label">Senin - Jum'at</span>
+              <span className="hours-colon">:</span>
+              <span className="hours-value">08.00 - 21.00 WIB</span>
+            </div>
+
+            <div className="hours-row">
+              <span className="hours-label">Sabtu</span>
+              <span className="hours-colon">:</span>
+              <span className="hours-value">09.00 - 13.00 WIB</span>
+            </div>
           </div>
         </div>
-        <hr className="border-gray-800 mb-4" />
-        <p className="text-center text-gray-500 text-sm">
-          &copy; {new Date().getFullYear()} Lost & Found UMY. All rights reserved.
-        </p>
+
+      </div>
+
+      {/* GARIS PEMBATAS */}
+      <div className="footer-divider-full"></div>
+
+      {/* COPYRIGHT */}
+      <div className="footer-bottom">
+        © {new Date().getFullYear()} Lost & Found Universitas Muhammadiyah Yogyakarta
       </div>
     </footer>
   );

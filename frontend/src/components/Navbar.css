@@ -1,0 +1,172 @@
+/* ===== NAVBAR WRAPPER ===== */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+/* ===== TOP BAR ===== */
+.navbar-top {
+  background-color: #ffffff;
+  padding: 15px 30px;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.logo-container {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+
+.logo-image {
+  height: 60px;
+}
+
+.logo-divider {
+  width: 2px;
+  height: 45px;
+  background-color: #e5e7eb;
+}
+
+/* ===== BOTTOM BAR ===== */
+.navbar-bottom {
+  background-color: #347433;
+}
+
+/* container full, tapi isi menu di-center */
+.navbar-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 30px;
+
+  display: flex;
+  justify-content: center; /* ⬅️ MENU KE TENGAH */
+}
+
+/* ===== MENU ===== */
+.nav-menu {
+  display: flex;
+  align-items: center;
+  gap: 70px; /* ⬅️ LEBIH LEBAR */
+  list-style: none;
+  margin: 0;
+  padding: 16px 0;
+}
+
+
+/* ===== LINK ===== */
+.nav-link {
+  text-decoration: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 15px;
+  padding-bottom: 6px;
+  position: relative;
+}
+
+.nav-link:hover {
+  color: #ffcc00;
+}
+
+/* ACTIVE: TEKS KUNING + GARIS BAWAH */
+.nav-link.active {
+  color: #ffcc00;
+}
+
+.nav-link.active::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 3px;
+  background-color: #ffcc00;
+  border-radius: 2px;
+}
+
+/* ===== DROPDOWN ===== */
+.dropdown-container {
+  position: relative;
+}
+
+/* BOX PUTIH */
+.dropdown-trigger-box {
+  background-color: #ffffff;
+  color: #347433;
+  padding: 10px 22px; /* lebih lega */
+  border-radius: 6px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+}
+
+.dropdown-trigger-box.active {
+  background-color: #ffcc00;
+  color: #1f2937;
+}
+
+.dropdown-icon {
+  transition: transform 0.3s ease;
+}
+
+.dropdown-icon.rotate {
+  transform: rotate(180deg);
+}
+
+/* ===== DROPDOWN MENU ===== */
+.dropdown-menu {
+  position: absolute;
+  top: 120%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #ffffff;
+  min-width: 220px;
+  border-radius: 8px;
+  padding: 8px 0;
+
+  list-style: none;     /* HILANGKAN BULLET */
+  margin: 0;
+
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+  opacity: 0;
+  visibility: hidden;
+  transition: 0.3s ease;
+  z-index: 1001;
+}
+
+.dropdown-menu li {
+  list-style: none;
+}
+
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+}
+
+.dropdown-item {
+  display: block;
+  padding: 10px 18px;
+  text-decoration: none;
+  color: #1f2937;
+  font-weight: 500;
+}
+
+.dropdown-item:hover {
+  background-color: rgba(255, 204, 0, 0.15);
+  color: #347433;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .nav-menu {
+    gap: 28px;
+  }
+
+  .logo-image {
+    height: 50px;
+  }
+}

@@ -1,0 +1,255 @@
+/* frontend/src/pages/FormPenemuanPage.css */
+
+/* --- Layout Dasar --- */
+.found-page-wrapper {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  background-color: #f9fafb;
+  font-family: sans-serif;
+}
+
+.found-header {
+  background-color: #14532d; /* Hijau UMY */
+  color: white;
+  padding: 40px 0;
+  margin-bottom: 20px;
+}
+
+.header-content {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+.header-content h1 {
+  font-size: 2.25rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.header-content p {
+  color: #fde047; /* Kuning */
+  font-size: 1.125rem;
+}
+
+/* --- Form Card --- */
+.form-card {
+  background-color: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  border: 1px solid #e5e7eb;
+  max-width: 900px;
+  margin: 0 auto 40px auto;
+  padding: 40px;
+  position: relative;
+}
+
+.form-section-title {
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #1f2937;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 12px;
+  margin-bottom: 24px;
+  margin-top: 10px;
+}
+
+/* --- Input Styles --- */
+.input-group { margin-bottom: 24px; }
+
+.form-label {
+  display: block;
+  font-weight: 700;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.required-star { color: #dc2626; margin-left: 4px; }
+.sub-label { font-weight: normal; color: #9ca3af; font-size: 12px; margin-left: 6px; }
+
+.custom-input, .custom-select, .custom-textarea {
+  width: 100%;
+  padding: 12px 16px;
+  background-color: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 6px;
+  font-size: 14px;
+  color: #1f2937;
+  transition: all 0.2s;
+  box-sizing: border-box;
+}
+
+.custom-input:focus, .custom-select:focus, .custom-textarea:focus {
+  outline: none;
+  border-color: #14532d;
+  background-color: #ffffff;
+  box-shadow: 0 0 0 3px rgba(20, 83, 45, 0.15);
+}
+
+.custom-input.error, .custom-select.error, .custom-textarea.error {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.error-text {
+  color: #dc2626;
+  font-size: 12px;
+  font-weight: 600;
+  margin-top: 6px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+/* Radio Button Grid */
+.radio-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  background-color: #f9fafb;
+  padding: 16px;
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+}
+
+.radio-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  font-size: 14px;
+  color: #374151;
+}
+
+.radio-input { accent-color: #14532d; width: 16px; height: 16px; }
+
+/* --- UPLOAD FOTO MODERN (FOTO 2) --- */
+.upload-box-modern {
+  border: 2px dashed #d1d5db;
+  border-radius: 12px;
+  background-color: #f9fafb;
+  min-height: 250px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  position: relative;
+  overflow: hidden;
+}
+
+.upload-box-modern:hover {
+  border-color: #14532d;
+  background-color: #f0fdf4;
+}
+
+.upload-box-modern.error-box {
+  border-color: #ef4444;
+  background-color: #fef2f2;
+}
+
+.hidden-input { display: none; }
+
+.upload-label-empty {
+  cursor: pointer;
+  text-align: center;
+  padding: 30px;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon-bg {
+  background-color: #e5e7eb;
+  padding: 16px;
+  border-radius: 50%;
+  margin-bottom: 16px;
+  transition: background-color 0.3s;
+}
+
+.upload-box-modern:hover .icon-bg { background-color: #dcfce7; }
+
+.upload-icon-modern {
+  width: 40px; height: 40px; color: #6b7280; transition: color 0.3s;
+}
+
+.upload-box-modern:hover .upload-icon-modern { color: #14532d; }
+
+.upload-text-main { font-size: 16px; font-weight: 600; color: #374151; margin-bottom: 4px; }
+.upload-text-sub { font-size: 13px; color: #9ca3af; }
+
+/* Preview Image */
+.preview-wrapper {
+  width: 100%; height: 100%; position: relative; display: flex;
+}
+
+.preview-img-full {
+  width: 100%; height: 100%; min-height: 250px; object-fit: cover; border-radius: 12px;
+}
+
+.btn-remove-overlay {
+  position: absolute; top: 12px; right: 12px;
+  background-color: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(4px); border: none; border-radius: 50%;
+  width: 36px; height: 36px; display: flex; align-items: center; justify-content: center;
+  cursor: pointer; box-shadow: 0 4px 6px rgba(0,0,0,0.1); transition: all 0.2s;
+}
+
+.btn-remove-overlay:hover { background-color: #fee2e2; transform: scale(1.05); }
+.remove-icon { width: 24px; height: 24px; color: #ef4444; }
+
+/* --- Recaptcha & Alerts --- */
+.recaptcha-wrapper {
+  background-color: #f9fafb; padding: 10px; border: 1px solid #e5e7eb; border-radius: 6px; display: inline-block; margin-bottom: 24px;
+}
+
+.alert-waspada {
+  background-color: #fef2f2; border-left: 5px solid #dc2626; padding: 20px; border-radius: 0 8px 8px 0; margin: 30px 0;
+}
+.alert-header { display: flex; align-items: center; gap: 10px; margin-bottom: 10px; }
+.alert-title { color: #991b1b; font-weight: 800; font-size: 1.1rem; }
+.alert-icon { width: 24px; height: 24px; color: #f59e0b; }
+.alert-desc { font-size: 14px; color: #7f1d1d; line-height: 1.5; margin-bottom: 16px; }
+.alert-highlight {
+  background-color: rgba(254, 202, 202, 0.3); color: #7f1d1d; padding: 10px 15px; border-left: 4px solid #b91c1c; font-weight: 700; font-style: italic; font-size: 13px; border-radius: 4px;
+}
+
+/* --- Buttons --- */
+.button-group {
+  display: flex; justify-content: flex-end; gap: 16px; padding-top: 20px; border-top: 1px solid #f3f4f6;
+}
+.btn {
+  padding: 12px 24px; font-weight: 700; border-radius: 6px; cursor: pointer; border: none; font-size: 14px; transition: background 0.2s;
+}
+.btn-cancel { background-color: #dc2626; color: white; }
+.btn-cancel:hover { background-color: #b91c1c; }
+.btn-submit { background-color: #facc15; color: #111827; }
+.btn-submit:hover { background-color: #eab308; }
+.btn-submit:disabled { background-color: #d1d5db; cursor: not-allowed; }
+
+/* --- Modal --- */
+.modal-overlay {
+  position: fixed; inset: 0; background-color: rgba(0,0,0,0.5); backdrop-filter: blur(4px); display: flex; align-items: center; justify-content: center; z-index: 50;
+}
+.modal-content {
+  background-color: white; padding: 32px; border-radius: 16px; width: 100%; max-width: 400px; text-align: center; box-shadow: 0 20px 25px rgba(0,0,0,0.1);
+}
+.success-icon-bg {
+  width: 80px; height: 80px; background-color: rgba(20, 83, 45, 0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 20px auto;
+}
+.success-icon { width: 50px; height: 50px; color: #14532d; }
+.modal-title { font-size: 1.5rem; font-weight: 800; color: #1f2937; margin-bottom: 8px; }
+.modal-text { color: #6b7280; margin-bottom: 24px; }
+.modal-actions { display: flex; flex-direction: column; gap: 12px; }
+.btn-modal-primary { background-color: #facc15; color: #111827; font-weight: 700; padding: 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; border: none; cursor: pointer; }
+.btn-modal-secondary { background-color: #f3f4f6; color: #374151; font-weight: 700; padding: 12px; border-radius: 8px; display: flex; align-items: center; justify-content: center; gap: 8px; border: none; cursor: pointer; }
+
+@media (max-width: 640px) {
+  .form-card { padding: 24px; margin-top: -20px; border-radius: 20px 20px 0 0; }
+  .radio-container { grid-template-columns: 1fr; }
+  .button-group { flex-direction: column-reverse; }
+  .btn { width: 100%; }
+}

@@ -66,7 +66,7 @@ const FormPenemuanPage = () => {
       case 'foreign_student':
         rules = { label: 'Passport Number', subLabel: '(5 - 10 Karakter)', placeholder: 'Enter Passport Number', maxLength: 10, minLength: 5, inputType: 'text' }; break;
       case 'dosen': case 'tendik':
-        rules = { label: 'NIP / NIK Pegawai', subLabel: '(Maksimal 18 Digit Angka)', placeholder: 'Masukkan NIP / NIK Pegawai', maxLength: 18, minLength: 1, inputType: 'numeric' }; break;
+        rules = { label: 'NIP / NIK Pegawai', subLabel: '(Maksimal 18 Digit Angka)', placeholder: 'Masukkan NIP / NIK Pegawai', maxLength: 18, minLength: 16, inputType: 'numeric' }; break;
       default:
         rules = { label: 'Nomor Identitas', subLabel: '', placeholder: 'Nomor Identitas', maxLength: 20, minLength: 1, inputType: 'text' };
     }

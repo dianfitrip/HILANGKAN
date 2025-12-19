@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-const itemRoutes = require('./routes/itemRoutes');
+const itemRoutes = require('./routes/lostItemRoutes');
 const foundItemRoutes = require('./routes/foundItemRoutes');
 
 const app = express();
@@ -18,6 +18,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 // Routes
 app.use('/api/items', itemRoutes);
 app.use('/api/found-items', foundItemRoutes);
+app.use('/api/lost-items', lostItemRoutes);
 
 // Test endpoint
 app.get('/', (req, res) => {

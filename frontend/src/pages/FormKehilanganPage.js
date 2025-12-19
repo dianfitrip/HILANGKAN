@@ -90,50 +90,43 @@ const handleSubmit = async (e) => {
   try {
     const formData = new FormData();
 
-    // ======================
-    // MAPPING KE BACKEND
-    // ======================
-    formData.append("reporter_name", form.nama);
-    formData.append("reporter_status", form.status);
-    formData.append("identification_number", form.identitas);
-    formData.append("reporter_phone", form.whatsapp);
-
-    // WAJIB: category_id HARUS ANGKA (ID)
-    formData.append("category_id", form.kategori);
-
+    // DATA BARANG
     formData.append("item_name", form.namaBarang);
+    formData.append("category_id", form.kategori); // ID angka
     formData.append("description", form.deskripsi);
     formData.append("location", form.lokasi);
     formData.append("date_event", form.tanggal);
 
-    // FILE (nama HARUS sama dengan multer)
-    if (form.item_image) {
-      formData.append("item_image", form.item_image);
+    // DATA PELAPOR
+    formData.append("reporter_name", form.nama);
+    formData.append("reporter_status", form.status);
+    formData.append("identification_number", form.identitas);
+    formData.append("reporter_phone", form.whatsapp);
+    formData.append("reporter_contact", form.whatsapp);
+    formData.append("reporter_email", "");
+
+    // CAPTCHA
+    formData.append("captcha", captcha);
+
+    // FOTO
+    if (form.foto) {
+      formData.append("item_image", form.foto);
     }
 
-    // ======================
-    // KIRIM KE BACKEND
-    // ======================
     await axios.post(
-      "http://localhost:3001/api/items/submit",
-      formData,
-      {
-        headers: {
-          "Content-Type": "multipart/form-data",
-        },
-      }
+      "http://localhost:3000/api/items/submit",
+      formData
     );
 
-    // ======================
-    // SUCCESS
-    // ======================
     setError("");
     setShowSuccess(true);
+
   } catch (error) {
-    console.error("Submit Error:", error);
+    console.error("ERROR AXIOS:", error.response || error);
     setError("Gagal mengirim laporan. Silakan coba lagi.");
   }
 };
+
 
 
 
@@ -241,10 +234,10 @@ const handleSubmit = async (e) => {
               required
             >
               <option value="">Pilih Kategori Barang</option>
-              <option value="Dompet">Dompet</option>
-              <option value="Kartu">Kartu Identitas</option>
-              <option value="Elektronik">Elektronik</option>
-              <option value="Lainnya">Lainnya</option>
+              <option value="1">Dompet</option>
+              <option value="2">Kartu Identitas</option>
+              <option value="3">Elektronik</option>
+              <option value="4">Lainnya</option>
             </select>
 
             <label className="required">Nama Barang</label>

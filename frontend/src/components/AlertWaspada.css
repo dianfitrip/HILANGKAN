@@ -1,44 +1,68 @@
-.alert-waspada {
-  background-color: #fef2f2;
-  border-left: 5px solid #dc2626;
-  padding: 20px;
-  border-radius: 0 8px 8px 0;
-  margin: 30px 0;
+/* ===== WRAPPER ===== */
+.alert-wrapper {
+  width: 100%;
+  display: flex;
+  justify-content: center;
 }
 
+/* ===== ALERT BOX ===== */
+.alert-waspada {
+  background-color: #fef2f2;
+  border-left: 6px solid #dc2626;
+  border-radius: 12px;
+
+  /* ⬅️ INI KUNCINYA */
+  max-width: 1200px;     /* SAMA DENGAN about-grid */
+  width: calc(100% - 80px); /* ngikut padding kiri-kanan konten */
+  padding: 32px 40px;
+
+  box-sizing: border-box;
+}
+
+/* ===== HEADER ===== */
 .alert-header {
   display: flex;
   align-items: center;
-  gap: 10px;
-  margin-bottom: 10px;
+  gap: 12px;
+  margin-bottom: 14px;
 }
 
 .alert-title {
   color: #991b1b;
   font-weight: 800;
-  font-size: 1.1rem;
+  font-size: 1.2rem;
 }
 
 .alert-icon {
-  width: 24px;
-  height: 24px;
-  color: #f59e0b; /* Warna oranye/kuning peringatan */
+  width: 26px;
+  height: 26px;
+  color: #f59e0b;
 }
 
+/* ===== TEXT ===== */
 .alert-desc {
-  font-size: 14px;
+  font-size: 15px;
   color: #7f1d1d;
-  line-height: 1.5;
-  margin-bottom: 16px;
+  line-height: 1.7;
+  margin-bottom: 18px;
 }
 
+/* ===== HIGHLIGHT ===== */
 .alert-highlight {
-  background-color: rgba(254, 202, 202, 0.3);
+  background-color: rgba(254, 202, 202, 0.4);
   color: #7f1d1d;
-  padding: 10px 15px;
+  padding: 14px 18px;
   border-left: 4px solid #b91c1c;
   font-weight: 700;
   font-style: italic;
-  font-size: 13px;
-  border-radius: 4px;
+  font-size: 14px;
+  border-radius: 8px;
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 900px) {
+  .alert-waspada {
+    width: calc(100% - 40px);
+    padding: 24px;
+  }
 }

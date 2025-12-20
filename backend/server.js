@@ -3,7 +3,7 @@ const cors = require('cors');
 const path = require('path');
 require('dotenv').config();
 
-const itemRoutes = require('./routes/lostItemRoutes');
+const itemRoutes = require('./routes/itemRoutes');
 const foundItemRoutes = require('./routes/foundItemRoutes');
 
 const app = express();

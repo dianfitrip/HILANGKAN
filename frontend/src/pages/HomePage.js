@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
 import "./HomePage.css";
+import AlertWaspada from "../components/AlertWaspada";
 
 function HomePage() {
   return (
@@ -25,12 +26,9 @@ function HomePage() {
       {/* ===== ABOUT SECTION ===== */}
       <section className="main-content">
         <div className="about-grid">
-
           {/* KIRI */}
           <div className="about-left">
-            <h2 className="about-title">
-              Apa itu Lost &amp; Found UMY?
-            </h2>
+            <h2 className="about-title">Apa itu Lost &amp; Found UMY?</h2>
 
             <img
               src="/images/LogoLostFound.png"
@@ -66,27 +64,13 @@ function HomePage() {
               </Link>
             </div>
           </div>
-
         </div>
       </section>
 
-      {/* ===== WARNING CARD ===== */}
-      <section className="warning-section">
-        <div className="warning-card">
-          <h3 className="warning-title">⚠️ WASPADA PENIPUAN!</h3>
-
-          <p className="warning-text">
-            Seluruh layanan Lost &amp; Found Universitas Muhammadiyah Yogyakarta
-            adalah <strong>100% GRATIS</strong>. Kami tidak pernah meminta biaya
-            administrasi, biaya transfer, atau imbalan uang tebusan dalam bentuk
-            apapun untuk pengembalian barang.
-          </p>
-
-          <div className="warning-highlight">
-            Abaikan pihak yang meminta transfer uang mengatasnamakan UMY!
-          </div>
-        </div>
+      <section className="alert-wrapper">
+        <AlertWaspada />
       </section>
+
 
       <Footer />
     </div>

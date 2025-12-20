@@ -18,6 +18,7 @@ app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
 // Routes
 app.use('/api/items', itemRoutes);
 app.use('/api/found-items', foundItemRoutes);
+app.use('/api/lost-items', lostItemRoutes);
 
 // Test endpoint
 app.get('/', (req, res) => {

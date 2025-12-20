@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import "./ListBarangTemuanPage.css";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
+import AlertWaspada from '../components/AlertWaspada'; 
 
 export default function ListBarangTemuanPage() {
   const [items, setItems] = useState([]);
@@ -102,22 +103,8 @@ export default function ListBarangTemuanPage() {
         </table>
       </div>
 
-      {/* ===== WARNING PENIPUAN (SAMA DENGAN HOME) ===== */}
-      <section className="warning-section">
-        <div className="warning-card">
-          <h3 className="warning-title">⚠️ WASPADA PENIPUAN!</h3>
-
-          <p className="warning-text">
-            Seluruh layanan Lost &amp; Found Universitas Muhammadiyah Yogyakarta
-            adalah <strong>100% GRATIS</strong>. Kami tidak pernah meminta biaya
-            administrasi, biaya transfer, atau imbalan uang tebusan dalam bentuk
-            apapun untuk pengembalian barang.
-          </p>
-
-          <div className="warning-highlight">
-            Abaikan pihak yang meminta transfer uang mengatasnamakan UMY!
-          </div>
-        </div>
+      <section className="alert-wrapper">
+        <AlertWaspada />
       </section>
 
       <Footer />

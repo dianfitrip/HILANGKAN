@@ -1,127 +1,155 @@
-import React from 'react';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import React from "react";
+import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
+// Pastikan komponen AlertWaspada sudah di-import jika file ini terpisah
+// import AlertWaspada from "../components/AlertWaspada"; 
+import "./ProsedurePage.css";
+import "./HomePage.css";
 
-const ProsedurPage = () => {
+export default function ProsedurPage() {
   return (
-    <div className="flex flex-col min-h-screen bg-gray-50 text-gray-800 font-sans">
+    <div className="prosedur-page">
       <Navbar />
+      <div className="navbar-spacer" />
 
-      {/* Main Content */}
-      <main className="flex-grow container mx-auto px-4 py-12 md:py-16">
-        
-        {/* Header Section */}
-        <div className="text-center mb-16 max-w-3xl mx-auto">
-          <h1 className="text-4xl md:text-5xl font-bold text-red-700 mb-6 tracking-tight">
-            Prosedur Layanan <span className="text-gray-900">Lost & Found</span>
+      {/* HERO */}
+      <section className="hero">
+        <img
+          src={process.env.PUBLIC_URL + "/images/potoUMY.png"}
+          alt="UMY"
+        />
+      </section>
+
+      {/* Pembuka Section Content */}
+      <section className="content">
+        {/* HEADER */}
+        <div className="header-card">
+          <h1 className="prosedur-title">
+            PROSEDUR LAYANAN LOST & FOUND UMY
           </h1>
-          <p className="text-lg md:text-xl text-gray-600 leading-relaxed">
-            Ikuti panduan di bawah ini untuk melaporkan kehilangan, penemuan, atau pengambilan barang di lingkungan Universitas Muhammadiyah Yogyakarta.
+
+          <p className="header-desc">
+            Berikut adalah Standar Operasional Prosedur (SOP) yang harus diikuti
+            oleh seluruh civitas akademika Universitas Muhammadiyah Yogyakarta
+            terkait layanan pelaporan kehilangan dan penemuan barang.
           </p>
         </div>
 
-        {/* Steps Container */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-10">
+        {/* GRID */}
+        <div className="grid">
+          {/* ================= KEHILANGAN ================= */}
+          <div className="card red">
+            <h3 className="card-title">
+              <span className="icon red">🔍</span>
+              Jika Kehilangan Barang
+            </h3>
 
-          {/* Card 1: Kehilangan */}
-          <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-t-4 border-red-600">
-            <div className="p-8">
-              <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                {/* Icon Search/Lost */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-red-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                </svg>
+            <div className="step">
+              <span className="step-number red">1</span>
+              <div>
+                <b>Pencarian Mandiri (WAJIB)</b>
+                <p>
+                  Sebelum membuat laporan baru, pelapor diwajibkan melakukan
+                  pengecekan daftar barang temuan terlebih dahulu.
+                </p>
+                <ul>
+                  <li>Akses menu <b>List Barang Temuan</b></li>
+                  <li>Gunakan kata kunci pencarian yang spesifik</li>
+                </ul>
               </div>
-              <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">Melaporkan Kehilangan</h3>
-              <ul className="space-y-3 text-gray-600">
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">1</span>
-                  <span>Buka halaman <span className="font-semibold text-red-600">Beranda</span>.</span>
+            </div>
+
+            <div className="step">
+              <span className="step-number red">2</span>
+              <div>
+                <b>Pengajuan Laporan Kehilangan</b>
+                <ul>
+                  <li>
+                    Jika barang <b>TIDAK DITEMUKAN</b>, buka menu
+                    <b> Layanan Mandiri</b>
+                  </li>
+                  <li>
+                    Pilih <b>Kehilangan Barang</b> dan isi formulir lengkap
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div className="step">
+              <span className="step-number red">3</span>
+              <div>
+                <b>Verifikasi & Pemantauan</b>
+                <p>
+                  Admin akan memverifikasi laporan dan menghubungi Anda jika
+                  terdapat kecocokan data barang temuan.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          {/* ================= KANAN ================= */}
+          <div className="right-col">
+            {/* MENEMUKAN */}
+            <div className="card green">
+              <h3 className="card-title">
+                <span className="icon green">✔</span>
+                Jika Menemukan Barang
+              </h3>
+
+              <ul className="clean-list">
+                <li>
+                  <b>Segera Laporkan Penemuan</b><br />
+                  Laporkan melalui menu <b>Layanan Mandiri</b> lalu pilih
+                  <b> Menemukan Barang</b>
                 </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">2</span>
-                  <span>Klik tombol "Laporkan Kehilangan".</span>
+
+                <li>
+                  <b>Dokumentasi & Detail Barang</b><br />
+                  Unggah foto dengan pencahayaan jelas dan deskripsi lengkap
                 </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">3</span>
-                  <span>Isi formulir dengan detail barang (foto, ciri-ciri, lokasi).</span>
+
+                <li>
+                  <b>Verifikasi</b><br />
+                  Admin akan memverifikasi data sebelum ditampilkan ke publik
                 </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-red-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">4</span>
-                  <span>Pantau status laporan Anda secara berkala.</span>
+              </ul>
+            </div>
+
+            {/* PENGAMBILAN */}
+            <div className="card blue">
+              <h3 className="card-title">
+                <span className="icon blue">👤</span>
+                Prosedur Pengambilan Barang
+              </h3>
+
+              {/* CARD BIRU MUDA */}
+              <div className="info-box">
+                “Barang saya terdata di List Temuan, bagaimana cara mengambilnya?”
+              </div>
+
+              <ul className="clean-list">
+                <li>
+                  Datang ke Sekretariat Lost & Found UMY atau hubungi Admin
+                </li>
+                <li>
+                  Wajib membawa identitas asli
+                  <b> KTM / KTP / SIM</b>
+                </li>
+                <li>
+                  Admin mencocokkan ciri barang sebelum serah terima
                 </li>
               </ul>
             </div>
           </div>
-
-          {/* Card 2: Penemuan */}
-          <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-t-4 border-green-600">
-            <div className="p-8">
-              <div className="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                {/* Icon Found/Check */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-green-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">Melaporkan Penemuan</h3>
-              <ul className="space-y-3 text-gray-600">
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">1</span>
-                  <span>Amankan barang yang Anda temukan.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">2</span>
-                  <span>Klik tombol "Laporkan Penemuan" di Beranda.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">3</span>
-                  <span>Unggah foto dan deskripsi barang.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-green-600 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">4</span>
-                  <span>Serahkan barang ke <strong>Pos Satpam</strong> atau <strong>Admin</strong> terdekat untuk verifikasi.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
-          {/* Card 3: Pengambilan */}
-          <div className="bg-white rounded-2xl shadow-lg hover:shadow-xl transition-shadow duration-300 overflow-hidden border-t-4 border-yellow-500">
-            <div className="p-8">
-              <div className="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mb-6 mx-auto">
-                {/* Icon Hand/Retrieve */}
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-8 w-8 text-yellow-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
-                </svg>
-              </div>
-              <h3 className="text-2xl font-bold text-gray-900 text-center mb-4">Pengambilan Barang</h3>
-              <ul className="space-y-3 text-gray-600">
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-yellow-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">1</span>
-                  <span>Lihat daftar barang temuan di website.</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-yellow-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">2</span>
-                  <span>Jika ada barang milik Anda, klik "Klaim".</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-yellow-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">3</span>
-                  <span>Datang ke lokasi penyimpanan (disebutkan di web).</span>
-                </li>
-                <li className="flex items-start">
-                  <span className="flex-shrink-0 h-6 w-6 bg-yellow-500 text-white rounded-full flex items-center justify-center text-xs font-bold mt-0.5 mr-3">4</span>
-                  <span>Tunjukkan <strong>KTM/Identitas</strong> dan bukti kepemilikan untuk mengambil barang.</span>
-                </li>
-              </ul>
-            </div>
-          </div>
-
         </div>
-      </main>
+
+        <section className="alert-wrapper">
+          <AlertWaspada />
+        </section>
+        
+      </section> 
 
       <Footer />
     </div>
   );
-};
-
-export default ProsedurPage;
+}

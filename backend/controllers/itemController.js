@@ -59,11 +59,10 @@ exports.createItemReport = (req, res) => {
     const query = `
         INSERT INTO reports (
             category_id, type, status, 
-            reporter_name, reporter_status, identification_number, 
-            reporter_contact, reporter_phone, 
+            reporter_name, reporter_status, identification_number, reporter_phone, 
             item_name, description, location, date_event, 
             image_path, access_token
-        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
     `;
 
     const values = [
@@ -72,8 +71,7 @@ exports.createItemReport = (req, res) => {
         'pending',        // Status awal (menunggu admin)
         data.reporter_name,
         data.reporter_status,
-        data.identification_number,
-        data.reporter_email, 
+        data.identification_number, 
         data.reporter_phone,
         data.item_name,
         data.description,

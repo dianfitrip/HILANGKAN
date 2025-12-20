@@ -152,3 +152,12 @@
     grid-template-columns: 1fr;
   }
 }
+
+
+/* ===== ALERT SECTION ===== */
+.alert-section {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding: 60px 0;
+}

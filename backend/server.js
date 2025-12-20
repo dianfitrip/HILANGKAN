@@ -1,30 +1,24 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const apiRoutes = require('./routes/apiRoutes');
 require('dotenv').config();
 
-const itemRoutes = require('./routes/itemRoutes');
-const foundItemRoutes = require('./routes/foundItemRoutes');
-
 const app = express();
-const port = 3000;
+const PORT = 5000; // Gunakan 5000 agar tidak bentrok dengan React (3000)
 
+// Middleware
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-// Serve Static Images (Uploads)
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
+// Static Folder untuk Gambar
+// Ini membuat URL http://localhost:5000/images/uploads/namafile.jpg bisa diakses
+app.use('/images', express.static(path.join(__dirname, 'public/images')));
 
 // Routes
-app.use('/api/items', itemRoutes);
-app.use('/api/found-items', foundItemRoutes);
-app.use('/api/lost-items', lostItemRoutes);
+app.use('/api', apiRoutes);
 
-// Test endpoint
-app.get('/', (req, res) => {
-  res.send('Backend Lost & Found UMY berjalan');
-});
-
-app.listen(port, () => {
-  console.log(`Server berjalan di port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

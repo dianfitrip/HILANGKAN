@@ -29,28 +29,65 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  /* table-layout: fixed; membuat lebar kolom patuh pada persentase */
+  table-layout: fixed; 
 }
 
 thead {
-  background-color: #ffffff;
+  background-color: #f3f4f6; /* Sedikit lebih abu agar header jelas */
 }
 
 th,
 td {
-  border: 1px solid #1f2937;
+  border: 1px solid #e5e7eb; /* Warna border lebih halus */
   padding: 12px;
   text-align: left;
   font-size: 14px;
+  vertical-align: top; /* Agar teks selalu mulai dari atas */
+  word-wrap: break-word; /* Mencegah teks panjang merusak layout */
 }
 
 th {
   font-weight: 700;
+  color: #111827;
+}
+
+/* === PENGATURAN LEBAR KOLOM (Total 100%) === */
+
+/* Kolom 1: No (Kecil) */
+th:nth-child(1) {
+  width: 5%;
+  text-align: center;
+}
+td:nth-child(1) {
+  text-align: center;
+}
+
+/* Kolom 2: Nama Barang (Sedang) */
+th:nth-child(2) {
+  width: 20%;
+}
+
+/* Kolom 3: Waktu (Cukup untuk tanggal) */
+th:nth-child(3) {
+  width: 15%;
+}
+
+/* Kolom 4: DESKRIPSI (Paling Besar) */
+th:nth-child(4) {
+  width: 45%; 
+}
+
+/* Kolom 5: Lokasi (Cukup) */
+th:nth-child(5) {
+  width: 15%;
 }
 
 .category {
   font-size: 12px;
   color: #6b7280;
   margin-top: 4px;
+  font-weight: normal;
 }
 
 tbody tr:hover {

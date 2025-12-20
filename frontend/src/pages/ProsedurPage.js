@@ -1,10 +1,9 @@
 import React from "react";
 import Navbar from "../components/Navbar";
 import Footer from "../components/Footer";
-// Pastikan komponen AlertWaspada sudah di-import jika file ini terpisah
-// import AlertWaspada from "../components/AlertWaspada"; 
-import "./ProsedurePage.css";
-import "./HomePage.css";
+import AlertWaspada from "../components/AlertWaspada"; 
+import "./ProsedurPage.css";
+
 
 export default function ProsedurPage() {
   return (
@@ -20,7 +19,7 @@ export default function ProsedurPage() {
         />
       </section>
 
-      {/* Pembuka Section Content */}
+      {/* CONTENT UTAMA */}
       <section className="content">
         {/* HEADER */}
         <div className="header-card">
@@ -142,12 +141,13 @@ export default function ProsedurPage() {
             </div>
           </div>
         </div>
-
-        <section className="alert-wrapper">
-          <AlertWaspada />
-        </section>
-        
       </section> 
+      {/* Penutup section content ada di sini agar AlertWaspada berada DI LUAR content */}
+
+      {/* ✅ ALERT WASPADA (Disamakan posisinya dengan HomePage) */}
+      <section className="alert-wrapper">
+        <AlertWaspada />
+      </section>
 
       <Footer />
     </div>

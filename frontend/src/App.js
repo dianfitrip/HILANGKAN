@@ -2,7 +2,7 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProsedurPage from './pages/ProsedurPage';
-
+import ListBarangTemuanPage from './pages/ListBarangTemuanPage';
 import FormPenemuanPage from './pages/FormPenemuanPage';
 import FormKehilanganPage from './pages/FormKehilanganPage';
 

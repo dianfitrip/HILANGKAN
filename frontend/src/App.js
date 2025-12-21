@@ -1,10 +1,10 @@
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import HomePage from './pages/HomePage';
-import ProsedurPage from './pages/ProsedurPage';
-import ListBarangTemuanPage from './pages/ListBarangTemuanPage';
-import FormPenemuanPage from './pages/FormPenemuanPage';
-import FormKehilanganPage from './pages/FormKehilanganPage';
+import HomePage from './pages/user/HomePage';
+import ProsedurPage from './pages/user/ProsedurPage';
+import ListBarangTemuanPage from './pages/user/ListBarangTemuanPage';
+import FormPenemuanPage from './pages/user/FormPenemuanPage';
+import FormKehilanganPage from './pages/user/FormKehilanganPage';
 
 
 function App() {

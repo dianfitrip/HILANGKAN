@@ -1,0 +1,286 @@
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+.kehilangan-page {
+  background: #f3f5f7;
+  min-height: 100vh;
+  font-family: "Inter", Arial, Helvetica, sans-serif;
+}
+
+.kehilangan-header {
+  background: #2e7d32;
+  color: #ffffff;
+  padding: 18px 32px;
+}
+
+.kehilangan-header h2 {
+  margin: 0;
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.kehilangan-header p {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #fbc02d;
+}
+
+.kehilangan-card {
+  background: #ffffff;
+  width: 680px;
+  margin: 24px auto 48px;
+  padding: 28px;
+  border-radius: 6px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+}
+
+.kehilangan-card h4 {
+  margin: 26px 0 16px;
+  font-size: 13px;
+  font-weight: 700;
+  color: #374151;
+  border-bottom: 1px solid #e5e7eb;
+  padding-bottom: 6px;
+}
+
+.kehilangan-card label {
+  display: block;
+  margin-top: 16px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #374151;
+}
+
+.required::after {
+  content: " *";
+  color: #d32f2f;
+}
+
+.kehilangan-card input[type="text"],
+.kehilangan-card input[type="date"],
+.kehilangan-card select,
+.kehilangan-card textarea {
+  width: 100%;
+  margin-top: 6px;
+  height: 38px;                
+  padding: 8px 12px;
+  font-size: 12px;
+  border: 1px solid #d1d5db;  
+  border-radius: 4px;
+  background: #f9fafb;
+  color: #111827;
+}
+
+.kehilangan-card textarea {
+  height: auto;
+  min-height: 100px;
+  resize: vertical;
+}
+
+.kehilangan-card input:focus,
+.kehilangan-card textarea:focus,
+.kehilangan-card select:focus {
+  outline: none;
+  border-color: #2e7d32;
+  box-shadow: 0 0 0 1px rgba(46, 125, 50, 0.15);
+}
+
+input::placeholder,
+textarea::placeholder {
+  color: #9ca3af;
+}
+
+.status-box {
+  margin-top: 6px;
+  padding: 14px;
+  background: #f9fafb;
+  border: 1px solid #d1d5db;
+  border-radius: 4px;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px 32px;
+}
+
+.status-box label {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.two-col {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px; 
+}
+
+.upload-box {
+  margin-top: 6px;
+  border: 2px dashed #d1d5db;
+  border-radius: 6px;
+  padding: 30px 10px;
+  background: #f9fafb;
+  text-align: center;
+  position: relative;
+}
+
+.upload-box p {
+  font-size: 12px;
+  color: #6b7280;
+}
+
+.upload-box input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+}
+
+.kehilangan-card .g-recaptcha {
+  margin-top: 12px;
+}
+
+.error {
+  margin-top: 12px;
+  background: #fdecea;
+  color: #c62828;
+  font-size: 12px;
+  padding: 8px;
+  border-radius: 4px;
+}
+
+.button-row {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  margin-top: 32px;
+}
+
+.btn-cancel {
+  background: #c62828;
+  color: #ffffff;
+  border: none;
+  padding: 8px 18px;
+  font-size: 12px;
+  border-radius: 4px;
+}
+
+.btn-submit {
+  background: #fbc02d;
+  color: #000;
+  border: none;
+  padding: 8px 22px;
+  font-size: 12px;
+  font-weight: 700;
+  border-radius: 4px;
+}
+
+.popup-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.55);
+  backdrop-filter: blur(2px); 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.popup-card {
+  background: #ffffff;
+  width: 360px;             
+  padding: 28px 24px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  animation: popupScale 0.25s ease;
+}
+
+@keyframes popupScale {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.popup-icon {
+  width: 64px;
+  height: 64px;
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-size: 34px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+  font-weight: bold;
+}
+
+.popup-card h3 {
+  margin: 6px 0 6px;
+  font-size: 18px;
+  font-weight: 700;
+  color: #1f2937;
+}
+
+.popup-card p {
+  font-size: 13px;
+  color: #6b7280;
+  margin-bottom: 20px;
+}
+
+.popup-buttons {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.popup-primary {
+  width: 100%;
+  background: #fbc02d;
+  border: none;
+  padding: 10px;
+  font-weight: 700;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.popup-secondary {
+  width: 100%;
+  background: #f1f3f4;
+  border: none;
+  padding: 10px;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.popup-primary:hover {
+  background: #f9a825;
+}
+
+.popup-secondary:hover {
+  background: #e5e7eb;
+}
+
+
+@media (max-width: 768px) {
+  .kehilangan-card {
+    width: 94%;
+  }
+
+  .two-col {
+    grid-template-columns: 1fr;
+  }
+}

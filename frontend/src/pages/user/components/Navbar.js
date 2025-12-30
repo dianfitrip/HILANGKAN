@@ -11,7 +11,6 @@ const Navbar = () => {
 
   return (
     <nav className="navbar">
-      {/* ===== TOP BAR (LOGO KIRI) ===== */}
       <div className="navbar-top">
         <div className="logo-container">
           <img src="/images/LogoUMY.png" alt="UMY" className="logo-image" />
@@ -24,7 +23,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* ===== BOTTOM BAR (MENU) ===== */}
       <div className="navbar-bottom">
         <div className="navbar-container">
           <ul className="nav-menu">
@@ -55,7 +53,6 @@ const Navbar = () => {
               </Link>
             </li>
 
-            {/* ===== DROPDOWN ===== */}
             <li
               className="dropdown-container"
               onMouseEnter={() => setIsDropdownOpen(true)}

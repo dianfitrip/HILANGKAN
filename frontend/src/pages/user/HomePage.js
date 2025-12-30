@@ -1,16 +1,20 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Link } from "react-router-dom";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
+import Navbar from "../../components/Navbar";
+import Footer from "../../../components/Footer";
 import "./HomePage.css";
-import AlertWaspada from "../components/AlertWaspada";
+import AlertWaspada from "../../components/AlertWaspada";
 
 function HomePage() {
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
     <div className="home-container">
       <Navbar />
 
-      {/* ===== HERO / BANNER ===== */}
       <section className="hero-section">
         <div
           className="hero-banner"
@@ -23,10 +27,8 @@ function HomePage() {
         />
       </section>
 
-      {/* ===== ABOUT SECTION ===== */}
       <section className="main-content">
         <div className="about-grid">
-          {/* KIRI */}
           <div className="about-left">
             <h2 className="about-title">Apa itu Lost &amp; Found UMY?</h2>
 
@@ -37,7 +39,6 @@ function HomePage() {
             />
           </div>
 
-          {/* KANAN */}
           <div className="about-right">
             <div className="about-text-wrapper">
               <p className="about-text">

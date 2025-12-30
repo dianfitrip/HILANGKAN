@@ -1,13 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../../components/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
-import AlertWaspada from '../components/AlertWaspada'; 
-// Gunakan CSS Penemuan agar tampilan SAMA PERSIS
-import './FormPenemuanPage.css'; 
+import AlertWaspada from '../../components/AlertWaspada'; 
+import './FormPenemuanPage.css';
 
-// Icons
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { PhotoIcon } from '@heroicons/react/24/outline';
 
@@ -20,14 +18,13 @@ const CATEGORIES = [
   { id: '6', name: 'Lainnya' },
 ];
 
-const FormKehilanganPage = () => {
+const FormPenemuanPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [captchaValue, setCaptchaValue] = useState(null);
   const [submitError, setSubmitError] = useState(null);
 
-  // Field disamakan dengan backend controller
   const [formData, setFormData] = useState({
     reporter_name: '',
     reporter_phone: '',
@@ -147,10 +144,7 @@ const FormKehilanganPage = () => {
     if (!formData.description) newErrors.description = "❌ Deskripsi wajib diisi.";
     if (!formData.date_event) newErrors.date_event = "❌ Tanggal wajib diisi.";
     if (!formData.location) newErrors.location = "❌ Lokasi wajib diisi.";
-    
-    // NOTE: FOTO TIDAK WAJIB UNTUK KEHILANGAN
-    // if (!imageFile) newErrors.item_image = "❌ Foto barang wajib diunggah.";
-    
+    if (!imageFile) newErrors.item_image = "❌ Foto barang wajib diunggah sebagai bukti.";
     if (!captchaValue) newErrors.recaptcha = "❌ Mohon centang kotak konfirmasi di atas.";
 
     setErrors(newErrors);
@@ -173,16 +167,15 @@ const FormKehilanganPage = () => {
 
     setLoading(true);
     const payload = new FormData();
+    
     Object.keys(formData).forEach(key => payload.append(key, formData[key]));
     
-    // PENTING: Type 'lost'
-    payload.append('type', 'lost');
+    payload.append('type', 'found');
 
     if (imageFile) payload.append('item_image', imageFile);
 
     try {
-      // PENTING: Port 5000
-      const response = await fetch('http://localhost:5000/api/items/submit', {
+      const response = await fetch('http://localhost:5000/api/reports', {
         method: 'POST',
         body: payload
       });
@@ -211,8 +204,8 @@ const FormKehilanganPage = () => {
 
       <div className="found-header">
         <div className="header-content">
-          <h1>Lapor Kehilangan Barang</h1>
-          <p>Laporkan barang yang hilang di area kampus UMY.</p>
+          <h1>Lapor Penemuan Barang</h1>
+          <p>Terima kasih telah berbaik hati melaporkan barang yang Anda temukan.</p>
         </div>
       </div>
 
@@ -229,8 +222,7 @@ const FormKehilanganPage = () => {
                 </div>
               )}
 
-              {/* Identitas Pelapor */}
-              <h2 className="form-section-title">Identitas Pelapor</h2>
+              <h2 className="form-section-title">Identitas Penemu</h2>
 
               <div className="input-group">
                 <label className="form-label">Nama<span className="required-star">*</span></label>
@@ -262,8 +254,7 @@ const FormKehilanganPage = () => {
                 {errors.identification_number && <p className="error-text">{errors.identification_number}</p>}
               </div>
 
-              {/* Data Barang */}
-              <h2 className="form-section-title mt-section">Data Barang Hilang</h2>
+              <h2 className="form-section-title mt-section">Data Barang Temuan</h2>
 
               <div className="input-group">
                 <label className="form-label">Kategori Barang<span className="required-star">*</span></label>
@@ -288,22 +279,19 @@ const FormKehilanganPage = () => {
 
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px'}}>
                 <div className="input-group">
-                  <label className="form-label">Tanggal Kehilangan<span className="required-star">*</span></label>
+                  <label className="form-label">Tanggal Ditemukan<span className="required-star">*</span></label>
                   <input type="date" name="date_event" max={today} value={formData.date_event} onChange={handleChange} className={`custom-input ${errors.date_event ? 'error' : ''}`}/>
                   {errors.date_event && <p className="error-text">{errors.date_event}</p>}
                 </div>
                 <div className="input-group">
-                  <label className="form-label">Lokasi Kehilangan<span className="required-star">*</span></label>
+                  <label className="form-label">Lokasi Penemuan<span className="required-star">*</span></label>
                   <input type="text" name="location" value={formData.location} onChange={handleChange} className={`custom-input ${errors.location ? 'error' : ''}`} placeholder="Contoh: Gedung AR Fachruddin"/>
                   {errors.location && <p className="error-text">{errors.location}</p>}
                 </div>
               </div>
 
-              {/* Foto Barang - OPSIONAL */}
               <div className="input-group" id="photo-section">
-                <label className="form-label">
-                    Foto Barang <span style={{fontWeight:'normal', color:'#666', fontSize:'0.9em'}}>(Opsional)</span>
-                </label>
+                <label className="form-label">Foto Barang<span className="required-star">*</span></label>
                 <div className={`upload-box-modern ${errors.item_image ? 'error-box' : ''}`}>
                   <input ref={fileInputRef} type="file" id="file-upload" className="hidden-input" accept="image/png, image/jpeg, image/jpg" onChange={handleFileChange} />
                   {!imagePreview ? (
@@ -342,7 +330,7 @@ const FormKehilanganPage = () => {
               <div className="button-group">
                 <button type="button" onClick={() => navigate('/')} className="btn btn-cancel">Batal</button>
                 <button type="submit" disabled={loading} className="btn btn-submit">
-                  {loading ? 'Mengirim...' : 'Laporkan Kehilangan'}
+                  {loading ? 'Mengirim...' : 'Laporkan Penemuan'}
                 </button>
               </div>
             </div>
@@ -369,4 +357,4 @@ const FormKehilanganPage = () => {
   );
 };
 
-export default FormKehilanganPage;
+export default FormPenemuanPage;

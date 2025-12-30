@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
 import "./ListBarangTemuanPage.css";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-import AlertWaspada from '../components/AlertWaspada'; 
+import Navbar from "../../components/Navbar";
+import Footer from "../../../components/Footer";
+import AlertWaspada from '../../components/AlertWaspada'; 
 
-// Helper untuk mengubah ID Kategori menjadi Nama
 const getCategoryName = (id) => {
   const catId = String(id);
   switch (catId) {
@@ -26,21 +25,22 @@ export default function ListBarangTemuanPage() {
   const fetchData = async () => {
     const params = new URLSearchParams();
     
-    // PENTING: Tambahkan parameter type="found"
+    // PERBAIKAN DI SINI:
+    // 1. Filter tipe 'found' (Barang Temuan)
+    // 2. Filter status 'approved' (Hanya yang sudah disetujui Admin)
     params.append("type", "found");
+    params.append("status", "approved"); 
 
     if (keyword) params.append("keyword", keyword);
     if (category) params.append("category", category);
 
     try {
-      // PENTING: Gunakan endpoint /api/reports (Port 5000)
       const res = await fetch(
         `http://localhost:5000/api/reports?${params.toString()}`
       );
       
       const data = await res.json();
       
-      // Cek apakah data array atau object error
       if (Array.isArray(data)) {
         setItems(data);
       } else {
@@ -55,7 +55,7 @@ export default function ListBarangTemuanPage() {
 
   useEffect(() => {
     fetchData();
-    // eslint-disable-next-line
+    window.scrollTo(0, 0);
   }, [keyword, category]);
 
   return (
@@ -65,7 +65,6 @@ export default function ListBarangTemuanPage() {
       <div className="found-container">
         <h1>Daftar Barang Temuan</h1>
 
-        {/* FILTER */}
         <div className="filter-bar">
           <input
             type="text"
@@ -88,34 +87,32 @@ export default function ListBarangTemuanPage() {
           </select>
         </div>
 
-        {/* TABLE */}
         <table>
           <thead>
             <tr>
-              <th>No</th>
+              <th style={{ width: '50px', textAlign: 'center' }}>No</th>
               <th>Nama Barang</th>
-              <th>Waktu Ditemukan</th>
-              <th>Deskripsi</th>
-              <th>Lokasi</th>
-              {/* Kolom Foto DIHAPUS */}
+              <th style={{ width: '20%' }}>Waktu Ditemukan</th>
+              <th style={{ width: '30%' }}>Deskripsi</th>
+              <th style={{ width: '20%' }}>Lokasi</th>
             </tr>
           </thead>
           <tbody>
             {items.length === 0 ? (
               <tr>
-                {/* Colspan diubah jadi 5 karena kolom foto hilang */}
-                <td colSpan="5" style={{ textAlign: "center", padding: "20px" }}>
-                  Data tidak ditemukan
+                <td colSpan="5" style={{ textAlign: "center", padding: "40px", color: "#666" }}>
+                  Data tidak ditemukan atau belum ada barang yang disetujui Admin.
                 </td>
               </tr>
             ) : (
               items.map((item, index) => (
                 <tr key={item.id}>
-                  <td>{index + 1}</td>
+                  <td style={{ textAlign: 'center' }}>{index + 1}</td>
                   <td>
                     <strong>{item.item_name}</strong>
-                    {/* Menggunakan Helper untuk nama kategori */}
-                    <div className="category">{getCategoryName(item.category_id)}</div>
+                    <div className="category" style={{ fontSize: '0.85rem', color: '#666', marginTop: '4px' }}>
+                      {getCategoryName(item.category_id)}
+                    </div>
                   </td>
                   <td>
                     {item.date_event ? new Date(item.date_event).toLocaleDateString("id-ID", {
@@ -128,7 +125,6 @@ export default function ListBarangTemuanPage() {
                   <td>
                     <strong>{item.location}</strong>
                   </td>
-                  {/* Sel Foto DIHAPUS */}
                 </tr>
               ))
             )}

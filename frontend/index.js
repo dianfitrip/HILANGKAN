@@ -3,20 +3,17 @@ const mysql = require('mysql2');
 const bodyParser = require('body-parser');
 const multer = require('multer');
 const path = require('path');
-const cors = require('cors'); // Tambahan: Agar bisa diakses frontend beda port/file
+const cors = require('cors'); 
 require('dotenv').config();
 
 const app = express();
 const port = 3000;
 
-// Middleware
-app.use(cors()); // Izinkan semua request dari frontend
+app.use(cors()); 
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.json());
-// Serve folder uploads agar gambar bisa diakses publik
 app.use('/uploads', express.static(path.join(__dirname, 'public/images/uploads')));
 
-// Konfigurasi Database
 const db = mysql.createConnection({
     host: process.env.DB_HOST || 'localhost',
     user: process.env.DB_USER || 'root',
@@ -29,10 +26,9 @@ db.connect((err) => {
     else console.log('Terhubung ke Database MySQL...');
 });
 
-// Konfigurasi Multer
+
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
-        // Pastikan folder ini ada: server/public/images/uploads/
         cb(null, 'public/images/uploads/'); 
     },
     filename: (req, file, cb) => {
@@ -41,7 +37,6 @@ const storage = multer.diskStorage({
 });
 const upload = multer({ storage: storage });
 
-// API 1: Ambil Daftar Kategori
 app.get('/api/categories', (req, res) => {
     const categories = [
         { id: 1, name: 'Elektronik (HP, Laptop, Kamera)' },
@@ -54,7 +49,6 @@ app.get('/api/categories', (req, res) => {
     res.json(categories);
 });
 
-// API 2: Ambil List Barang Temuan
 app.get('/api/reports/found', (req, res) => {
     const searchQuery = req.query.search || '';
     const categoryFilter = req.query.category || '';
@@ -82,7 +76,6 @@ app.get('/api/reports/found', (req, res) => {
     db.query(sql, queryParams, (err, results) => {
         if (err) return res.status(500).json({ error: 'Database Error' });
         
-        // Ubah path gambar agar lengkap dengan URL server
         const mappedResults = results.map(item => ({
             ...item,
             image_url: item.image_path ? `http://localhost:${port}${item.image_path}` : null
@@ -92,7 +85,6 @@ app.get('/api/reports/found', (req, res) => {
     });
 });
 
-// API 3: Kirim OTP
 app.post('/api/send-otp', (req, res) => {
     const { email } = req.body;
     if (!email) return res.json({ success: false, message: 'Email kosong' });
@@ -107,7 +99,6 @@ app.post('/api/send-otp', (req, res) => {
     });
 });
 
-// API 4: Verifikasi OTP
 app.post('/api/verify-otp', (req, res) => {
     const { email, otp_code } = req.body;
     const query = `SELECT * FROM verification_codes WHERE email = ? AND otp_code = ? AND expires_at > NOW()`;
@@ -119,13 +110,9 @@ app.post('/api/verify-otp', (req, res) => {
     });
 });
 
-// API 5: Submit Laporan
 app.post('/api/reports', upload.single('item_image'), (req, res) => {
     const data = req.body;
     const file = req.file;
-
-    // (Logic verifikasi OTP di sini sebaiknya dilakukan lagi, atau diasumsikan frontend sudah validasi)
-    // Untuk penyederhanaan, kita langsung simpan
     
     const imagePath = file ? '/uploads/' + file.filename : null;
     const accessToken = Math.random().toString(36).substring(7);

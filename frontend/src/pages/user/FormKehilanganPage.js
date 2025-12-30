@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from '../../components/Navbar';
+import Footer from '../../../components/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
-import AlertWaspada from '../components/AlertWaspada'; 
-import './FormPenemuanPage.css';
+import AlertWaspada from '../../components/AlertWaspada'; 
+import './FormKehilanganPage.css'; 
 
-// Icons
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { PhotoIcon } from '@heroicons/react/24/outline';
 
@@ -19,7 +18,7 @@ const CATEGORIES = [
   { id: '6', name: 'Lainnya' },
 ];
 
-const FormPenemuanPage = () => {
+const FormKehilanganPage = () => {
   const navigate = useNavigate();
   const [loading, setLoading] = useState(false);
   const [showSuccessModal, setShowSuccessModal] = useState(false);
@@ -53,7 +52,6 @@ const FormPenemuanPage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
 
-  // --- EFEK PERUBAHAN STATUS ---
   useEffect(() => {
     const status = formData.reporter_status;
     let rules = {};
@@ -76,7 +74,6 @@ const FormPenemuanPage = () => {
     setErrors(prev => ({ ...prev, identification_number: null }));
   }, [formData.reporter_status]);
 
-  // --- HANDLER INPUT ---
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'identification_number') {
@@ -97,7 +94,6 @@ const FormPenemuanPage = () => {
     if (submitError) setSubmitError(null);
   };
 
-  // --- HANDLER FOTO ---
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -123,7 +119,6 @@ const FormPenemuanPage = () => {
     if (value && errors.recaptcha) setErrors(prev => ({ ...prev, recaptcha: null }));
   };
 
-  // --- VALIDASI ---
   const validateForm = () => {
     const newErrors = {};
     if (!formData.reporter_phone) {
@@ -150,16 +145,12 @@ const FormPenemuanPage = () => {
     if (!formData.date_event) newErrors.date_event = "❌ Tanggal wajib diisi.";
     if (!formData.location) newErrors.location = "❌ Lokasi wajib diisi.";
     
-    // VALIDASI KHUSUS PENEMUAN: FOTO WAJIB
-    if (!imageFile) newErrors.item_image = "❌ Foto barang wajib diunggah sebagai bukti.";
-    
     if (!captchaValue) newErrors.recaptcha = "❌ Mohon centang kotak konfirmasi di atas.";
 
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
-  // --- SUBMIT ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError(null);
@@ -176,18 +167,14 @@ const FormPenemuanPage = () => {
 
     setLoading(true);
     const payload = new FormData();
-    
-    // Append data text
     Object.keys(formData).forEach(key => payload.append(key, formData[key]));
     
-    // PENTING: Tambahkan Type 'found'
-    payload.append('type', 'found');
+    payload.append('type', 'lost');
 
     if (imageFile) payload.append('item_image', imageFile);
 
     try {
-      // PENTING: Port 5000
-      const response = await fetch('http://localhost:5000/api/items/submit', {
+      const response = await fetch('http://localhost:5000/api/reports', {
         method: 'POST',
         body: payload
       });
@@ -216,8 +203,8 @@ const FormPenemuanPage = () => {
 
       <div className="found-header">
         <div className="header-content">
-          <h1>Lapor Penemuan Barang</h1>
-          <p>Terima kasih telah berbaik hati melaporkan barang yang Anda temukan.</p>
+          <h1>Lapor Kehilangan Barang</h1>
+          <p>Laporkan barang yang hilang di area kampus UMY.</p>
         </div>
       </div>
 
@@ -234,8 +221,7 @@ const FormPenemuanPage = () => {
                 </div>
               )}
 
-              {/* Identitas Penemu */}
-              <h2 className="form-section-title">Identitas Penemu</h2>
+              <h2 className="form-section-title">Identitas Pelapor</h2>
 
               <div className="input-group">
                 <label className="form-label">Nama<span className="required-star">*</span></label>
@@ -267,8 +253,7 @@ const FormPenemuanPage = () => {
                 {errors.identification_number && <p className="error-text">{errors.identification_number}</p>}
               </div>
 
-              {/* Data Barang */}
-              <h2 className="form-section-title mt-section">Data Barang Temuan</h2>
+              <h2 className="form-section-title mt-section">Data Barang Hilang</h2>
 
               <div className="input-group">
                 <label className="form-label">Kategori Barang<span className="required-star">*</span></label>
@@ -293,20 +278,21 @@ const FormPenemuanPage = () => {
 
               <div style={{display:'grid', gridTemplateColumns:'1fr 1fr', gap:'20px'}}>
                 <div className="input-group">
-                  <label className="form-label">Tanggal Ditemukan<span className="required-star">*</span></label>
+                  <label className="form-label">Tanggal Kehilangan<span className="required-star">*</span></label>
                   <input type="date" name="date_event" max={today} value={formData.date_event} onChange={handleChange} className={`custom-input ${errors.date_event ? 'error' : ''}`}/>
                   {errors.date_event && <p className="error-text">{errors.date_event}</p>}
                 </div>
                 <div className="input-group">
-                  <label className="form-label">Lokasi Penemuan<span className="required-star">*</span></label>
+                  <label className="form-label">Lokasi Kehilangan<span className="required-star">*</span></label>
                   <input type="text" name="location" value={formData.location} onChange={handleChange} className={`custom-input ${errors.location ? 'error' : ''}`} placeholder="Contoh: Gedung AR Fachruddin"/>
                   {errors.location && <p className="error-text">{errors.location}</p>}
                 </div>
               </div>
 
-              {/* Foto Barang */}
               <div className="input-group" id="photo-section">
-                <label className="form-label">Foto Barang<span className="required-star">*</span></label>
+                <label className="form-label">
+                    Foto Barang <span style={{fontWeight:'normal', color:'#666', fontSize:'0.9em'}}>(Opsional)</span>
+                </label>
                 <div className={`upload-box-modern ${errors.item_image ? 'error-box' : ''}`}>
                   <input ref={fileInputRef} type="file" id="file-upload" className="hidden-input" accept="image/png, image/jpeg, image/jpg" onChange={handleFileChange} />
                   {!imagePreview ? (
@@ -345,7 +331,7 @@ const FormPenemuanPage = () => {
               <div className="button-group">
                 <button type="button" onClick={() => navigate('/')} className="btn btn-cancel">Batal</button>
                 <button type="submit" disabled={loading} className="btn btn-submit">
-                  {loading ? 'Mengirim...' : 'Laporkan Penemuan'}
+                  {loading ? 'Mengirim...' : 'Laporkan Kehilangan'}
                 </button>
               </div>
             </div>
@@ -372,4 +358,4 @@ const FormPenemuanPage = () => {
   );
 };
 
-export default FormPenemuanPage;
+export default FormKehilanganPage;

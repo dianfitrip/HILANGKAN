@@ -1,40 +1,41 @@
 const db = require('../config/database');
 
-// --- HELPER: Generate Token Unik ---
 const generateToken = () => {
     return Math.random().toString(36).substring(2, 8).toUpperCase();
 };
 
-// 1. GET ALL REPORTS (Mendukung Filter Type, Keyword, & Category)
+// 1. GET ALL REPORTS (Untuk Halaman List Publik & Pencarian)
 exports.getAllReports = (req, res) => {
-    // Ambil parameter dari URL (contoh: ?type=found&keyword=dompet&category=3)
-    const { type, keyword, category } = req.query; 
+    const { type, keyword, category, status } = req.query; 
     
-    // Query dasar: Ambil semua data yang statusnya bukan 'rejected'
+    // Default: Ambil yang statusnya bukan rejected
     let sql = `SELECT * FROM reports WHERE status != 'rejected'`;
     let params = [];
 
-    // --- FILTER 1: Type (Lost / Found) ---
-    // Ini wajib agar data tidak tercampur
+    // Jika ada filter status spesifik (misal: approved untuk publik)
+    if (status) {
+        sql = `SELECT * FROM reports WHERE status = ?`;
+        params = [status];
+    }
+
+    // Filter Tipe (Lost / Found)
     if (type) {
         sql += ` AND type = ?`;
         params.push(type);
     }
 
-    // --- FILTER 2: Category (Dropdown) ---
+    // Filter Kategori
     if (category) {
         sql += ` AND category_id = ?`;
         params.push(category);
     }
 
-    // --- FILTER 3: Keyword (Search Bar) ---
-    // Mencari kecocokan di nama barang ATAU deskripsi
+    // Filter Keyword (Nama, Deskripsi, Lokasi)
     if (keyword) {
-        sql += ` AND (item_name LIKE ? OR description LIKE ?)`;
-        params.push(`%${keyword}%`, `%${keyword}%`);
+        sql += ` AND (item_name LIKE ? OR description LIKE ? OR location LIKE ?)`;
+        params.push(`%${keyword}%`, `%${keyword}%`, `%${keyword}%`);
     }
 
-    // Urutkan dari yang terbaru
     sql += ` ORDER BY created_at DESC`;
 
     db.query(sql, params, (err, results) => {
@@ -42,21 +43,17 @@ exports.getAllReports = (req, res) => {
             console.error("Database Error:", err);
             return res.status(500).json({ error: err.message });
         }
-
-        // PENTING: Kita kirim results mentah (raw) dari database.
-        // Frontend (ListBarangTemuanPage) akan menerima field:
-        // item_name, description, location, date_event, category_id, image_path
         res.json(results);
     });
 };
 
-// 2. CREATE NEW REPORT (Submit Laporan Baru)
+// 2. CREATE REPORT (Untuk Form Lapor)
 exports.createReport = (req, res) => {
     console.log("New Report Data:", req.body);
     console.log("New Report File:", req.file);
 
     const {
-        type, // Wajib: 'lost' atau 'found'
+        type, 
         item_name,
         category_id,
         description,
@@ -70,15 +67,14 @@ exports.createReport = (req, res) => {
 
     // Validasi sederhana
     if (!type || !item_name || !reporter_name) {
-        return res.status(400).json({ message: "Data wajib tidak lengkap! (Type, Nama Barang, Nama Pelapor)" });
+        return res.status(400).json({ message: "Data wajib tidak lengkap!" });
     }
 
-    // Path gambar (jika ada upload, simpan path-nya)
-    const image_path = req.file ? `/images/uploads/${req.file.filename}` : null;
-    
-    // Generate token akses untuk edit/hapus nanti
+    // Simpan nama file gambar (jika ada)
+    const image_path = req.file ? req.file.filename : null;
     const access_token = generateToken();
     
+    // Default status: 'pending' agar dicek admin dulu
     const sql = `
         INSERT INTO reports 
         (type, item_name, category_id, description, location, date_event, 

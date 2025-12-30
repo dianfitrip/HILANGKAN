@@ -2,8 +2,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// Pastikan folder tujuan ada
-const uploadDir = path.join(__dirname, '../public/images/uploads');
+// PERBAIKAN: Simpan langsung di folder 'uploads' di root backend
+const uploadDir = path.join(__dirname, '../uploads');
+
 if (!fs.existsSync(uploadDir)){
     fs.mkdirSync(uploadDir, { recursive: true });
 }
@@ -13,7 +14,7 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    // Format nama file: timestamp-namaasli
+    // Membersihkan nama file dari spasi
     cb(null, Date.now() + '-' + file.originalname.replace(/\s/g, '_'));
   }
 });
@@ -32,7 +33,7 @@ const fileFilter = (req, file, cb) => {
 
 const upload = multer({ 
   storage: storage,
-  limits: { fileSize: 2 * 1024 * 1024 }, // Max 2MB
+  limits: { fileSize: 2 * 1024 * 1024 }, 
   fileFilter: fileFilter
 });
 

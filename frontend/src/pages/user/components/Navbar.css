@@ -1,4 +1,3 @@
-/* ===== NAVBAR WRAPPER ===== */
 .navbar {
   position: sticky;
   top: 0;
@@ -6,7 +5,6 @@
   font-family: "Segoe UI", Roboto, sans-serif;
 }
 
-/* ===== TOP BAR ===== */
 .navbar-top {
   background-color: #ffffff;
   padding: 15px 30px;
@@ -29,39 +27,32 @@
   background-color: #e5e7eb;
 }
 
-/* ===== BOTTOM BAR ===== */
 .navbar-bottom {
-  background-color: #347433;
-
-  /* SHADOW DI BAWAH NAVBAR */
+  background-color: #004029;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.18);
   position: relative;
   z-index: 999;
 }
 
-
-/* container full, tapi isi menu di-center */
 .navbar-container {
   max-width: 1280px;
   margin: 0 auto;
   padding: 0 30px;
 
   display: flex;
-  justify-content: center; /* ⬅️ MENU KE TENGAH */
+  justify-content: center; 
 }
 
-/* ===== MENU ===== */
+
 .nav-menu {
   display: flex;
   align-items: center;
-  gap: 70px; /* ⬅️ LEBIH LEBAR */
+  gap: 70px; 
   list-style: none;
   margin: 0;
   padding: 16px 0;
 }
 
-
-/* ===== LINK ===== */
 .nav-link {
   text-decoration: none;
   color: #ffffff;
@@ -75,7 +66,6 @@
   color: #ffcc00;
 }
 
-/* ACTIVE: TEKS KUNING + GARIS BAWAH */
 .nav-link.active {
   color: #ffcc00;
 }
@@ -91,16 +81,14 @@
   border-radius: 2px;
 }
 
-/* ===== DROPDOWN ===== */
 .dropdown-container {
   position: relative;
 }
 
-/* BOX PUTIH */
 .dropdown-trigger-box {
   background-color: #ffffff;
-  color: #347433;
-  padding: 10px 22px; /* lebih lega */
+  color: #004029;
+  padding: 10px 22px; 
   border-radius: 6px;
   font-weight: 700;
   display: flex;
@@ -122,7 +110,6 @@
   transform: rotate(180deg);
 }
 
-/* ===== DROPDOWN MENU ===== */
 .dropdown-menu {
   position: absolute;
   top: 120%;
@@ -133,7 +120,7 @@
   border-radius: 8px;
   padding: 8px 0;
 
-  list-style: none;     /* HILANGKAN BULLET */
+  list-style: none;     
   margin: 0;
 
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
@@ -163,10 +150,9 @@
 
 .dropdown-item:hover {
   background-color: rgba(255, 204, 0, 0.15);
-  color: #347433;
+  color: #004029;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .nav-menu {
     gap: 28px;

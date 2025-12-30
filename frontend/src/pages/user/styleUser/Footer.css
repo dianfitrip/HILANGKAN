@@ -1,0 +1,98 @@
+.footer {
+  background-color: #004029;
+  color: #ffffff;
+  padding-top: 40px;
+  padding-bottom: 10px;
+
+  border-top: 4px solid #FFC107;
+  font-family: "Segoe UI", Roboto, sans-serif;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 30px;
+
+  display: grid;
+  grid-template-columns: 1.2fr 1fr 1fr;
+  gap: 60px; 
+  align-items: start;
+}
+
+.footer-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-logo-section {
+  align-items: center;
+}
+
+.footer-logo {
+  height: 130px;
+  filter: brightness(0) invert(1);
+}
+
+.section-title {
+  color: #FFC107;
+  font-size: 16px; 
+  font-weight: 700;
+  margin-bottom: 18px; 
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.contact-row,
+.hours-row {
+  display: grid;
+  grid-template-columns: auto 10px 1fr;
+  gap: 8px;
+  margin-bottom: 8px; 
+}
+
+.contact-label,
+.hours-label {
+  font-weight: 600;
+  font-size: 13px;
+  white-space: nowrap;
+}
+
+.contact-colon,
+.hours-colon {
+  font-weight: 600;
+}
+
+.contact-value,
+.hours-value {
+  font-size: 13px;
+  line-height: 1.5;
+}
+
+.footer-divider-full {
+  width: 100%;
+  height: 1px;
+  background-color: rgba(255, 255, 255, 0.25);
+  margin: 30px 0 12px; 
+}
+
+.footer-bottom {
+  text-align: center;
+  font-size: 12px; 
+  color: rgba(255, 255, 255, 0.75);
+  padding-bottom: 12px;
+}
+
+@media (max-width: 900px) {
+  .footer-container {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+
+  .footer-logo-section {
+    align-items: flex-start;
+  }
+
+  .footer-logo {
+    height: 110px;
+  }
+}

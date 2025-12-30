@@ -2,7 +2,6 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 
-// PERBAIKAN: Simpan langsung di folder 'uploads' di root backend
 const uploadDir = path.join(__dirname, '../uploads');
 
 if (!fs.existsSync(uploadDir)){
@@ -14,7 +13,6 @@ const storage = multer.diskStorage({
     cb(null, uploadDir);
   },
   filename: (req, file, cb) => {
-    // Membersihkan nama file dari spasi
     cb(null, Date.now() + '-' + file.originalname.replace(/\s/g, '_'));
   }
 });

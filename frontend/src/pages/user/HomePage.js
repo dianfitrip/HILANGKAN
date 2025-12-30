@@ -28,8 +28,9 @@ function HomePage() {
       </section>
 
       <section className="main-content">
-        <div className="about-grid">
-          <div className="about-left">
+        <div className="page-wrapper">
+          <div className="about-grid">
+            <div className="about-left">
             <h2 className="about-title">Apa itu Lost &amp; Found UMY?</h2>
 
             <img
@@ -63,6 +64,7 @@ function HomePage() {
               <Link to="/lapor-penemuan" className="btn-found">
                 Anda Menemukan Barang?
               </Link>
+            </div>
             </div>
           </div>
         </div>

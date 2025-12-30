@@ -2,7 +2,6 @@ const db = require('../config/database');
 
 // 1. GET: Statistik Ringkas
 exports.getDashboardStats = (req, res) => {
-    // Query SQL untuk mendapatkan semua data yang dibutuhkan sekaligus
     const sql = `
         SELECT 
             COUNT(*) as total_reports,
@@ -27,7 +26,7 @@ exports.getDashboardStats = (req, res) => {
 
 // 2. GET: Ambil Laporan Berdasarkan Status (Pending, Approved, Archived)
 exports.getReportsByStatus = (req, res) => {
-    const { status } = req.query; // query param: ?status=pending
+    const { status } = req.query; 
     
     let query = "";
     let params = [];
@@ -72,26 +71,22 @@ exports.deleteReport = (req, res) => {
 exports.updateReportDetails = (req, res) => {
     const { id } = req.params;
     
-    // PERBAIKAN: Ambil juga field data pelapor dari req.body
     const { 
         item_name, category_id, date_event, location, description, type,
         reporter_name, reporter_status, reporter_phone, identification_number 
     } = req.body;
 
-    // PERBAIKAN: Tambahkan kolom pelapor ke dalam Query UPDATE
     let sql = `
         UPDATE reports 
         SET item_name=?, category_id=?, date_event=?, location=?, description=?, type=?,
             reporter_name=?, reporter_status=?, reporter_phone=?, identification_number=?
     `;
     
-    // Masukkan nilai-nilainya secara berurutan
     let params = [
         item_name, category_id, date_event, location, description, type,
         reporter_name, reporter_status, reporter_phone, identification_number
     ];
 
-    // Jika ada file foto baru yang diupload, update juga kolom image_path
     if (req.file) {
         sql += `, image_path=?`;
         params.push(req.file.filename);

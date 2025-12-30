@@ -6,7 +6,7 @@ const Arsip = () => {
     const [loading, setLoading] = useState(true);
     const [selectedReport, setSelectedReport] = useState(null);
     const [filterText, setFilterText] = useState("");
-    const [filterCategory, setFilterCategory] = useState(""); // Filter Kategori
+    const [filterCategory, setFilterCategory] = useState(""); 
 
     const formatDate = (dateString) => {
         if (!dateString) return '-';
@@ -39,7 +39,6 @@ const Arsip = () => {
 
     useEffect(() => { fetchReports(); }, []);
 
-    // --- FILTER LOGIC ---
     const filteredReports = reports.filter(item => {
         const matchText = 
             item.item_name.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -67,7 +66,6 @@ const Arsip = () => {
                     Arsip Laporan (Selesai / Ditolak)
                 </h3>
                 <div style={{display: 'flex', gap: '10px'}}>
-                    {/* FILTER KATEGORI */}
                     <select 
                         value={filterCategory} 
                         onChange={(e) => setFilterCategory(e.target.value)} 
@@ -137,7 +135,6 @@ const Arsip = () => {
                 </table>
             )}
 
-            {/* MODAL DETAIL (Sama seperti sebelumnya) */}
             {selectedReport && (
                 <div className="modal-overlay" onClick={() => setSelectedReport(null)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()}>

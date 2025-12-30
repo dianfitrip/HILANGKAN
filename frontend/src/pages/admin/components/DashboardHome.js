@@ -4,7 +4,6 @@ import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
 import '../styleAdmin/DashboardHome.css';
 
-// Ikon (Pastikan Anda sudah install @heroicons/react atau ganti dengan emoji jika belum)
 import { 
     ClipboardDocumentCheckIcon, 
     ClockIcon, 
@@ -37,14 +36,12 @@ const DashboardHome = () => {
             });
     }, []);
 
-    // Data untuk Grafik Pie (Lost vs Found)
     const pieData = [
         { name: 'Kehilangan', value: Number(stats.type_lost) },
         { name: 'Ditemukan', value: Number(stats.type_found) },
     ];
-    const COLORS = ['#EF4444', '#10B981']; // Merah untuk Hilang, Hijau untuk Temuan
+    const COLORS = ['#EF4444', '#10B981']; 
 
-    // Data untuk Grafik Batang (Status Laporan)
     const barData = [
         { name: 'Pending', jumlah: Number(stats.total_pending) },
         { name: 'Aktif (Tayang)', jumlah: Number(stats.total_active) },
@@ -52,7 +49,6 @@ const DashboardHome = () => {
         { name: 'Ditolak', jumlah: Number(stats.total_rejected) },
     ];
 
-    // Variabel Animasi Framer Motion
     const containerVariants = {
         hidden: { opacity: 0 },
         visible: { 
@@ -75,7 +71,6 @@ const DashboardHome = () => {
             initial="hidden"
             animate="visible"
         >
-            {/* 1. WELCOME BANNER */}
             <motion.div className="welcome-banner" variants={itemVariants}>
                 <h1>Halo, Admin! </h1>
                 <p>Berikut adalah ringkasan aktivitas laporan barang hilang & temuan hari ini.</p>
@@ -84,9 +79,7 @@ const DashboardHome = () => {
                 </div>
             </motion.div>
 
-            {/* 2. STATS CARDS GRID */}
             <div className="stats-grid">
-                {/* Card 1: Masuk Hari Ini */}
                 <motion.div className="stat-card-modern card-today" variants={itemVariants}>
                     <div className="stat-info">
                         <h3>{stats.reports_today}</h3>
@@ -97,7 +90,7 @@ const DashboardHome = () => {
                     </div>
                 </motion.div>
 
-                {/* Card 2: Pending (Butuh Tindakan) */}
+
                 <motion.div className="stat-card-modern card-pending" variants={itemVariants}>
                     <div className="stat-info">
                         <h3>{stats.total_pending}</h3>
@@ -108,7 +101,6 @@ const DashboardHome = () => {
                     </div>
                 </motion.div>
 
-                {/* Card 3: Aktif (Barang Belum Kembali) */}
                 <motion.div className="stat-card-modern card-active" variants={itemVariants}>
                     <div className="stat-info">
                         <h3>{stats.total_active}</h3>
@@ -119,7 +111,6 @@ const DashboardHome = () => {
                     </div>
                 </motion.div>
 
-                {/* Card 4: Selesai */}
                 <motion.div className="stat-card-modern card-resolved" variants={itemVariants}>
                     <div className="stat-info">
                         <h3>{stats.total_resolved}</h3>
@@ -131,10 +122,8 @@ const DashboardHome = () => {
                 </motion.div>
             </div>
 
-            {/* 3. CHARTS SECTION */}
             <div className="charts-section">
                 
-                {/* Bar Chart: Statistik Status */}
                 <motion.div className="chart-card" variants={itemVariants}>
                     <div className="chart-header">
                         <h3>Statistik Status Laporan</h3>
@@ -152,7 +141,6 @@ const DashboardHome = () => {
                     </div>
                 </motion.div>
 
-                {/* Pie Chart: Hilang vs Ditemukan */}
                 <motion.div className="chart-card" variants={itemVariants}>
                     <div className="chart-header">
                         <h3>Rasio Hilang vs Ditemukan</h3>

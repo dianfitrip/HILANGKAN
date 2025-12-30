@@ -6,7 +6,6 @@ const Footer = () => {
     <footer className="footer">
       <div className="footer-container">
 
-        {/* 1. BAGIAN LOGO (Tetap) */}
         <div className="footer-section footer-logo-section">
           <img
             src="/images/footerlogo.png"
@@ -15,7 +14,6 @@ const Footer = () => {
           />
         </div>
 
-        {/* 2. BAGIAN ALAMAT (Data Baru dari Gambar) */}
         <div className="footer-section footer-info">
           <h3 className="section-title">ALAMAT</h3>
           <div className="contact-table">
@@ -30,7 +28,6 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* 3. BAGIAN KONTAK ADMIN (Data Baru dari Gambar) */}
         <div className="footer-section footer-info">
           <h3 className="section-title">KONTAK ADMIN</h3>
           <div className="contact-table">

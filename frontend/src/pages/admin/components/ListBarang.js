@@ -2,21 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const ActiveItems = () => {
-    // --- STATE ---
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filterText, setFilterText] = useState("");
-    
-    // UBAH DISINI: Default filter jadi 'all' agar laporan kehilangan yang diapprove langsung muncul
     const [filterType, setFilterType] = useState("all"); 
     const [filterCategory, setFilterCategory] = useState("");
-    
-    // State Modal
     const [showModal, setShowModal] = useState(false);
     const [modalMode, setModalMode] = useState('detail'); 
     const [selectedItem, setSelectedItem] = useState(null); 
-    
-    // State Form
     const [imagePreview, setImagePreview] = useState(null);
     const [imageFile, setImageFile] = useState(null);
     const [formData, setFormData] = useState({
@@ -24,7 +17,6 @@ const ActiveItems = () => {
         type: 'found', reporter_name: '', reporter_status: 'mahasiswa', reporter_phone: '', identification_number: ''
     });
 
-    // --- HELPER RULES ---
     const getIdentityRules = (status) => {
         switch (status) {
             case 'mahasiswa': return { label: 'NIM', subLabel: '(Wajib 11 Digit Angka)', placeholder: 'Contoh: 20210140001', maxLength: 11, isNumeric: true };
@@ -35,7 +27,6 @@ const ActiveItems = () => {
         }
     };
 
-    // --- HELPER DISPLAY ---
     const formatDate = (dateString) => {
         if (!dateString) return '-';
         return new Date(dateString).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' });
@@ -56,7 +47,6 @@ const ActiveItems = () => {
         }
     };
 
-    // --- FETCH DATA (Status Approved) ---
     const fetchReports = () => {
         setLoading(true);
         axios.get('http://localhost:5000/api/admin/reports?status=approved')
@@ -66,7 +56,6 @@ const ActiveItems = () => {
 
     useEffect(() => { fetchReports(); }, []);
 
-    // --- FILTER LOGIC ---
     const filteredReports = reports.filter(item => {
         const matchText = 
             item.item_name.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -79,7 +68,6 @@ const ActiveItems = () => {
         return matchText && matchType && matchCategory;
     });
 
-    // --- HANDLERS ---
     const handleDetail = (item) => {
         setModalMode('detail'); setSelectedItem(item); setShowModal(true);
     };
@@ -101,8 +89,6 @@ const ActiveItems = () => {
             const payload = new FormData();
             Object.keys(formData).forEach(key => payload.append(key, formData[key]));
             if (imageFile) payload.append('item_image', imageFile);
-
-            // Hanya UPDATE karena tombol tambah sudah dipindah
             await axios.put(`http://localhost:5000/api/admin/reports/${selectedItem.id}`, payload);
             alert("Data berhasil diperbarui!");
             setShowModal(false);
@@ -141,10 +127,8 @@ const ActiveItems = () => {
 
     return (
         <div className="table-card">
-            {/* Header */}
             <div className="table-header-action" style={{flexDirection: 'column', alignItems: 'stretch', gap: '15px'}}>
                 <div style={{display:'flex', justifyContent:'space-between', alignItems:'center'}}>
-                    {/* UBAH JUDUL */}
                     <h3 className="page-title" style={{margin:0, borderLeft:'none', paddingLeft:0, color:'#065F46', fontSize:'1.2rem'}}>
                         Manajemen Laporan (Aktif)
                     </h3>
@@ -170,7 +154,6 @@ const ActiveItems = () => {
                 </div>
             </div>
 
-            {/* TABEL */}
             {loading ? <p>Loading...</p> : (
                 <table className="admin-table">
                     <thead>
@@ -190,7 +173,6 @@ const ActiveItems = () => {
                                 <td>
                                     <strong style={{color:'#1e293b', fontSize:'0.95rem', display:'block'}}>{item.item_name}</strong>
                                     <span style={{fontSize:'0.8rem', color:'#64748b'}}>{getCategoryName(item.category_id)}</span>
-                                    {/* Badge Status Selalu Muncul Karena Default 'All' */}
                                     <div style={{marginTop:'2px'}}>
                                         <span className={`badge badge-${item.type}`} style={{
                                             backgroundColor: item.type === 'found' ? '#D1FAE5' : '#FEE2E2',
@@ -217,7 +199,6 @@ const ActiveItems = () => {
                 </table>
             )}
             
-            {/* MODAL (DETAIL & EDIT) */}
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{maxWidth: modalMode === 'detail' ? '800px' : '700px'}}>
@@ -227,7 +208,6 @@ const ActiveItems = () => {
                         </div>
                         <div className="modal-body">
                             
-                            {/* VIEW DETAIL */}
                             {modalMode === 'detail' && selectedItem && (
                                 <div className="detail-container">
                                     <div className="detail-left">
@@ -262,7 +242,6 @@ const ActiveItems = () => {
                                 </div>
                             )}
 
-                            {/* VIEW FORM (EDIT ONLY) */}
                             {modalMode === 'edit' && (
                                 <form onSubmit={handleSave}>
                                     <div className="detail-section-title">📦 Data Barang</div>

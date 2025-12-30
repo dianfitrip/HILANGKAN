@@ -8,11 +8,9 @@ const generateToken = () => {
 exports.getAllReports = (req, res) => {
     const { type, keyword, category, status } = req.query; 
     
-    // Default: Ambil yang statusnya bukan rejected
     let sql = `SELECT * FROM reports WHERE status != 'rejected'`;
     let params = [];
 
-    // Jika ada filter status spesifik (misal: approved untuk publik)
     if (status) {
         sql = `SELECT * FROM reports WHERE status = ?`;
         params = [status];
@@ -47,7 +45,7 @@ exports.getAllReports = (req, res) => {
     });
 };
 
-// 2. CREATE REPORT (Untuk Form Lapor)
+// 2. CREATE REPORT 
 exports.createReport = (req, res) => {
     console.log("New Report Data:", req.body);
     console.log("New Report File:", req.file);
@@ -65,16 +63,13 @@ exports.createReport = (req, res) => {
         reporter_phone
     } = req.body;
 
-    // Validasi sederhana
     if (!type || !item_name || !reporter_name) {
         return res.status(400).json({ message: "Data wajib tidak lengkap!" });
     }
 
-    // Simpan nama file gambar (jika ada)
     const image_path = req.file ? req.file.filename : null;
     const access_token = generateToken();
     
-    // Default status: 'pending' agar dicek admin dulu
     const sql = `
         INSERT INTO reports 
         (type, item_name, category_id, description, location, date_event, 

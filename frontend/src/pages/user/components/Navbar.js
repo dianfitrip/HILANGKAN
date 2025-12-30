@@ -12,25 +12,26 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <div className="navbar-top">
-        <div className="logo-container">
-          <img src="/images/LogoUMY.png" alt="UMY" className="logo-image" />
-          <div className="logo-divider"></div>
-          <img
-            src="/images/LogoLostFound.png"
-            alt="Lost & Found"
-            className="logo-image"
-          />
+        <div className="navbar-top-wrapper">
+          <div className="navbar-top-inner">
+            <div className="logo-container">
+              <img src="/images/LogoUMY.png" alt="UMY" className="logo-image" />
+              <div className="logo-divider"></div>
+              <img
+                src="/images/LogoLostFound.png"
+                alt="Lost & Found"
+                className="logo-image"
+              />
+            </div>
+          </div>
         </div>
       </div>
 
       <div className="navbar-bottom">
-        <div className="navbar-container">
+        <div className="navbar-inner navbar-menu-center">
           <ul className="nav-menu">
             <li>
-              <Link
-                to="/"
-                className={`nav-link ${isActive("/") ? "active" : ""}`}
-              >
+              <Link to="/" className={`nav-link ${isActive("/") ? "active" : ""}`}>
                 HOME
               </Link>
             </li>
@@ -46,8 +47,21 @@ const Navbar = () => {
 
             <li>
               <Link
-                to="/list"
-                className={`nav-link ${isActive("/list") ? "active" : ""}`}
+                to="/list-kehilangan"
+                className={`nav-link ${
+                  isActive("/list-kehilangan") ? "active" : ""
+                }`}
+              >
+                LIST BARANG HILANG
+              </Link>
+            </li>
+
+            <li>
+              <Link
+                to="/list-penemuan"
+                className={`nav-link ${
+                  isActive("/list-penemuan") ? "active" : ""
+                }`}
               >
                 LIST BARANG TEMUAN
               </Link>
@@ -68,9 +82,7 @@ const Navbar = () => {
                 <span>LAYANAN MANDIRI</span>
                 <ChevronDown
                   size={16}
-                  className={`dropdown-icon ${
-                    isDropdownOpen ? "rotate" : ""
-                  }`}
+                  className={`dropdown-icon ${isDropdownOpen ? "rotate" : ""}`}
                 />
               </div>
 

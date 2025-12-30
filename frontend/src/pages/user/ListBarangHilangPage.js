@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import "./styleUser/ListBarangTemuanPage.css";
+import "./styleUser/ListBarangTemuanPage.css"; 
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import AlertWaspada from './components/AlertWaspada'; 
@@ -17,15 +17,15 @@ const getCategoryName = (id) => {
   }
 };
 
-export default function ListBarangTemuanPage() {
+export default function ListBarangHilangPage() {
   const [items, setItems] = useState([]);
   const [keyword, setKeyword] = useState("");
   const [category, setCategory] = useState("");
 
   const fetchData = async () => {
     const params = new URLSearchParams();
-   
-    params.append("type", "found");
+    
+    params.append("type", "lost");
     params.append("status", "approved"); 
 
     if (keyword) params.append("keyword", keyword);
@@ -60,7 +60,7 @@ export default function ListBarangTemuanPage() {
       <Navbar />
 
       <div className="found-container">
-        <h1>Daftar Barang Temuan</h1>
+        <h1>Daftar Barang Hilang</h1>
 
         <div className="filter-bar">
           <input
@@ -89,16 +89,16 @@ export default function ListBarangTemuanPage() {
             <tr>
               <th style={{ width: '50px', textAlign: 'center' }}>No</th>
               <th>Nama Barang</th>
-              <th style={{ width: '20%' }}>Waktu Ditemukan</th>
+              <th style={{ width: '20%' }}>Waktu Hilang</th>
               <th style={{ width: '30%' }}>Deskripsi</th>
-              <th style={{ width: '20%' }}>Lokasi Temuan</th>
+              <th style={{ width: '20%' }}>Lokasi Hilang</th>
             </tr>
           </thead>
           <tbody>
             {items.length === 0 ? (
               <tr>
                 <td colSpan="5" style={{ textAlign: "center", padding: "40px", color: "#666" }}>
-                  Data tidak ditemukan atau belum ada barang yang disetujui Admin.
+                  Data tidak ditemukan atau belum ada laporan kehilangan yang disetujui Admin.
                 </td>
               </tr>
             ) : (

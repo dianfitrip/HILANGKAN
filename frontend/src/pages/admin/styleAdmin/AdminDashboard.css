@@ -1,4 +1,3 @@
-/* Reset & Base */
 .admin-layout * {
     box-sizing: border-box;
 }
@@ -9,10 +8,9 @@
     background-color: #f3f4f6;
     font-family: 'Poppins', sans-serif;
     width: 100%;
-    overflow-x: auto; /* Allow horizontal scroll for whole page if needed */
+    overflow-x: auto; 
 }
 
-/* --- SIDEBAR --- */
 .sidebar {
     width: 260px;
     min-width: 260px;
@@ -61,7 +59,6 @@
     margin-top: 5px;
 }
 
-/* Menu Item */
 .menu-item {
     padding: 12px 16px;
     cursor: pointer;
@@ -89,7 +86,6 @@
     font-weight: bold;
 }
 
-/* --- KONTEN UTAMA --- */
 .content-area {
     flex: 1;
     padding: 30px;
@@ -105,7 +101,6 @@
     font-weight: 700;
 }
 
-/* FILTER & SEARCH */
 .table-header-action {
     display: flex;
     justify-content: space-between;
@@ -126,7 +121,6 @@
 }
 .search-input:focus { border-color: #065F46; box-shadow: 0 0 0 3px rgba(6, 95, 70, 0.1); }
 
-/* STATS CARDS */
 .stats-container {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
@@ -148,28 +142,24 @@
 .stat-title { color: #6B7280; font-size: 0.85rem; font-weight: 600; text-transform: uppercase; }
 .stat-value { font-size: 2rem; font-weight: 800; color: #1F2937; margin-top: 5px; }
 
-
-/* === PERBAIKAN TABEL UTAMA === */
 .table-card {
     background: white;
     border-radius: 12px;
     padding: 20px;
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
-    /* Scroll horizontal aktif jika layar terlalu kecil untuk tabel */
     overflow-x: auto; 
 }
 
 .admin-table {
     width: 100%;
     border-collapse: collapse;
-    /* PENTING: Gunakan auto agar browser menghitung lebar berdasarkan isi teks */
     table-layout: auto; 
-    min-width: 900px; /* Lebar minimum tabel agar tidak gepeng */
+    min-width: 900px; 
 }
 
 .admin-table th, 
 .admin-table td {
-    padding: 16px 20px; /* Padding lebih lega */
+    padding: 16px 20px; 
     border-bottom: 1px solid #e2e8f0;
     vertical-align: middle;
     text-align: left;
@@ -181,32 +171,25 @@
     color: #475569;
     font-weight: 600;
     border-bottom: 2px solid #E2E8F0;
-    white-space: nowrap; /* Header tidak boleh turun baris */
+    white-space: nowrap; 
 }
 
-/* === PENGATURAN LEBAR KOLOM FLEKSIBEL === */
-
-/* 1. Nama Barang: Diberi prioritas lebar paling besar */
 .col-name { 
     width: 40%; 
     min-width: 180px; 
 }
 
-/* 2. Pelapor & Lokasi: Lebar sedang */
 .col-reporter, .col-location { 
     width: 20%; 
     min-width: 180px; 
 }
 
-/* 3. Aksi: Lebar pas body (shrink to fit) dan tidak boleh wrap */
 .col-action { 
-    width: 1%; /* Trik CSS agar kolom menyusut sesuai isi konten */
-    white-space: nowrap; /* Tombol berjajar ke samping, tidak turun */
-    text-align: right; /* Tombol rata kanan atau tengah */
+    width: 1%; 
+    white-space: nowrap; 
+    text-align: right; 
 }
 
-
-/* Style Text Item */
 .item-name-text {
     font-weight: 700;
     color: #1e293b;
@@ -216,7 +199,6 @@
     line-height: 1.5;
 }
 
-/* Badge Status */
 .badge {
     display: inline-block;
     padding: 4px 10px;
@@ -229,39 +211,32 @@
 .badge-lost { background-color: #FEF2F2; color: #991B1B; border: 1px solid #FECACA; }
 .badge-found { background-color: #ECFDF5; color: #065F46; border: 1px solid #A7F3D0; }
 
-/* TOMBOL AKSI */
-/* Container Tombol: Ubah menjadi Grid 2 Kolom */
 .action-buttons {
     display: grid;
-    grid-template-columns: 1fr 1fr; /* Membagi menjadi 2 kolom sama besar */
-    gap: 8px; /* Jarak antar tombol */
+    grid-template-columns: 1fr 1fr; 
+    gap: 8px; 
     width: 100%;
 }
 
-/* Tombol: Pastikan ukurannya mengisi kotak grid */
 .btn {
     border: none;
-    padding: 8px 4px; /* Padding disesuaikan agar tidak terlalu lebar */
+    padding: 8px 4px; 
     border-radius: 6px;
     cursor: pointer;
     font-weight: 600;
     font-size: 0.75rem;
     color: white;
     transition: all 0.2s;
-    
-    /* Agar teks & icon rata tengah */
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 4px;
-    
-    width: 100%; /* Tombol memenuhi sel grid */
+    width: 100%; 
     white-space: nowrap;
 }
 
-/* Pastikan kolom Aksi cukup lebar di tabel */
 .col-action {
-    width: 180px; /* Atur lebar minimal agar tombol tidak gepeng */
+    width: 180px; 
     min-width: 180px;
     vertical-align: middle;
 }
@@ -271,8 +246,6 @@
 .btn-reject { background-color: #F59E0B; }
 .btn-delete { background-color: #EF4444; }
 
-
-/* === MODAL DETAIL === */
 .modal-overlay {
     position: fixed;
     top: 0; left: 0;

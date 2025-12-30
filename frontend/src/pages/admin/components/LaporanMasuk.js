@@ -2,16 +2,14 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 
 const LaporanMasuk = () => {
-    // --- STATE ---
     const [reports, setReports] = useState([]);
     const [loading, setLoading] = useState(true);
     const [filterText, setFilterText] = useState("");
     const [filterCategory, setFilterCategory] = useState("");
     const [selectedReport, setSelectedReport] = useState(null);
 
-    // State untuk Modal Form (Tambah Baru)
     const [showModal, setShowModal] = useState(false);
-    const [modalMode, setModalMode] = useState('detail'); // 'detail' atau 'add'
+    const [modalMode, setModalMode] = useState('detail'); 
     const [imagePreview, setImagePreview] = useState(null);
     const [imageFile, setImageFile] = useState(null);
     const [formData, setFormData] = useState({
@@ -19,7 +17,6 @@ const LaporanMasuk = () => {
         reporter_name: 'Admin', reporter_status: 'tendik', reporter_phone: '', identification_number: ''
     });
 
-    // --- HELPER ---
     const formatDate = (dateString) => {
         if (!dateString) return '-';
         return new Date(dateString).toLocaleDateString('id-ID', {
@@ -52,7 +49,6 @@ const LaporanMasuk = () => {
         }
     };
 
-    // --- FETCH DATA ---
     const fetchReports = () => {
         setLoading(true);
         axios.get('http://localhost:5000/api/admin/reports?status=pending')
@@ -62,7 +58,6 @@ const LaporanMasuk = () => {
 
     useEffect(() => { fetchReports(); }, []);
 
-    // --- FILTER ---
     const filteredReports = reports.filter(item => {
         const matchText = 
             item.item_name.toLowerCase().includes(filterText.toLowerCase()) ||
@@ -72,7 +67,6 @@ const LaporanMasuk = () => {
         return matchText && matchCategory;
     });
 
-    // --- HANDLERS ---
     const handleDetail = (item) => {
         setModalMode('detail');
         setSelectedReport(item);
@@ -98,7 +92,6 @@ const LaporanMasuk = () => {
             Object.keys(formData).forEach(key => payload.append(key, formData[key]));
             if (imageFile) payload.append('item_image', imageFile);
 
-            // Create New Report
             await axios.post('http://localhost:5000/api/reports', payload);
             alert("Laporan berhasil ditambahkan!");
             
@@ -120,7 +113,6 @@ const LaporanMasuk = () => {
         } catch (error) { alert("Gagal memproses."); }
     };
 
-    // Form Handlers
     const handleFormChange = (e) => {
         const { name, value } = e.target;
         const rules = getIdentityRules(formData.reporter_status);
@@ -144,7 +136,6 @@ const LaporanMasuk = () => {
                     <h3 className="page-title" style={{margin:0, borderLeft:'none', paddingLeft:0, color:'#065F46', fontSize:'1.2rem'}}>
                         Laporan Masuk (Pending)
                     </h3>
-                    {/* TOMBOL TAMBAH DIPINDAHKAN KESINI */}
                     <button className="btn btn-approve" onClick={handleAddNew} style={{padding:'8px 16px', fontSize:'0.9rem'}}>
                         + Buat Laporan
                     </button>
@@ -200,7 +191,6 @@ const LaporanMasuk = () => {
                 </table>
             )}
 
-            {/* MODAL (DETAIL & ADD FORM) */}
             {showModal && (
                 <div className="modal-overlay" onClick={() => setShowModal(false)}>
                     <div className="modal-content" onClick={(e) => e.stopPropagation()} style={{maxWidth: modalMode === 'detail' ? '800px' : '700px'}}>
@@ -210,7 +200,6 @@ const LaporanMasuk = () => {
                         </div>
                         <div className="modal-body">
                             
-                            {/* MODE DETAIL */}
                             {modalMode === 'detail' && selectedReport && (
                                 <div className="detail-container">
                                     <div className="detail-left">
@@ -244,7 +233,6 @@ const LaporanMasuk = () => {
                                 </div>
                             )}
 
-                            {/* MODE ADD FORM */}
                             {modalMode === 'add' && (
                                 <form onSubmit={handleSave}>
                                     <div className="detail-section-title">📦 Data Barang</div>
@@ -278,7 +266,6 @@ const LaporanMasuk = () => {
                             )}
                         </div>
 
-                        {/* Footer untuk Mode Detail */}
                         {modalMode === 'detail' && selectedReport && (
                             <div className="modal-footer">
                                 <button className="btn btn-approve" onClick={() => handleAction(selectedReport.id, 'approved')}>Terima</button>

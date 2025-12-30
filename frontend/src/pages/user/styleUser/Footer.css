@@ -1,8 +1,6 @@
 .footer {
-  background-color: #347433;
+  background-color: #004029;
   color: #ffffff;
-
-  /* DIPERKECIL */
   padding-top: 40px;
   padding-bottom: 10px;
 
@@ -10,7 +8,6 @@
   font-family: "Segoe UI", Roboto, sans-serif;
 }
 
-/* ===== CONTAINER ===== */
 .footer-container {
   max-width: 1200px;
   margin: 0 auto;
@@ -18,43 +15,39 @@
 
   display: grid;
   grid-template-columns: 1.2fr 1fr 1fr;
-  gap: 60px; /* dipersempit */
+  gap: 60px; 
   align-items: start;
 }
 
-/* ===== SECTION ===== */
 .footer-section {
   display: flex;
   flex-direction: column;
 }
 
-/* ===== LOGO ===== */
 .footer-logo-section {
   align-items: center;
 }
 
 .footer-logo {
-  height: 130px; /* DIPERKECIL (sebelumnya 180px) */
+  height: 130px;
   filter: brightness(0) invert(1);
 }
 
-/* ===== TITLE ===== */
 .section-title {
   color: #FFC107;
-  font-size: 16px; /* lebih kecil */
+  font-size: 16px; 
   font-weight: 700;
-  margin-bottom: 18px; /* dipersempit */
+  margin-bottom: 18px; 
   text-transform: uppercase;
   letter-spacing: 1px;
 }
 
-/* ===== CONTACT & HOURS ===== */
 .contact-row,
 .hours-row {
   display: grid;
   grid-template-columns: auto 10px 1fr;
   gap: 8px;
-  margin-bottom: 8px; /* jarak diperkecil */
+  margin-bottom: 8px; 
 }
 
 .contact-label,
@@ -75,23 +68,20 @@
   line-height: 1.5;
 }
 
-/* ===== FULL WIDTH DIVIDER ===== */
 .footer-divider-full {
   width: 100%;
   height: 1px;
   background-color: rgba(255, 255, 255, 0.25);
-  margin: 30px 0 12px; /* diperkecil */
+  margin: 30px 0 12px; 
 }
 
-/* ===== COPYRIGHT ===== */
 .footer-bottom {
   text-align: center;
-  font-size: 12px; /* lebih kecil */
+  font-size: 12px; 
   color: rgba(255, 255, 255, 0.75);
   padding-bottom: 12px;
 }
 
-/* ===== RESPONSIVE ===== */
 @media (max-width: 900px) {
   .footer-container {
     grid-template-columns: 1fr;

@@ -1,12 +1,11 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../components/Navbar';
-import Footer from '../components/Footer';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
-import AlertWaspada from '../components/AlertWaspada'; 
-import './FormPenemuanPage.css';
+import AlertWaspada from './components/AlertWaspada'; 
+import './styleUser/FormPenemuanPage.css';
 
-// Icons
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { PhotoIcon } from '@heroicons/react/24/outline';
 
@@ -53,7 +52,6 @@ const FormPenemuanPage = () => {
   const [imagePreview, setImagePreview] = useState(null);
   const fileInputRef = useRef(null);
 
-  // --- EFEK PERUBAHAN STATUS ---
   useEffect(() => {
     const status = formData.reporter_status;
     let rules = {};
@@ -76,7 +74,6 @@ const FormPenemuanPage = () => {
     setErrors(prev => ({ ...prev, identification_number: null }));
   }, [formData.reporter_status]);
 
-  // --- HANDLER INPUT ---
   const handleChange = (e) => {
     const { name, value } = e.target;
     if (name === 'identification_number') {
@@ -97,7 +94,6 @@ const FormPenemuanPage = () => {
     if (submitError) setSubmitError(null);
   };
 
-  // --- HANDLER FOTO ---
   const handleFileChange = (e) => {
     const file = e.target.files[0];
     if (file) {
@@ -118,13 +114,11 @@ const FormPenemuanPage = () => {
     if (fileInputRef.current) fileInputRef.current.value = '';
   };
 
-  // --- HANDLER RECAPTCHA ---
   const onCaptchaChange = (value) => {
     setCaptchaValue(value);
     if (value && errors.recaptcha) setErrors(prev => ({ ...prev, recaptcha: null }));
   };
 
-  // --- VALIDASI ---
   const validateForm = () => {
     const newErrors = {};
     if (!formData.reporter_phone) {
@@ -150,7 +144,6 @@ const FormPenemuanPage = () => {
     if (!formData.description) newErrors.description = "❌ Deskripsi wajib diisi.";
     if (!formData.date_event) newErrors.date_event = "❌ Tanggal wajib diisi.";
     if (!formData.location) newErrors.location = "❌ Lokasi wajib diisi.";
-    
     if (!imageFile) newErrors.item_image = "❌ Foto barang wajib diunggah sebagai bukti.";
     if (!captchaValue) newErrors.recaptcha = "❌ Mohon centang kotak konfirmasi di atas.";
 
@@ -158,7 +151,6 @@ const FormPenemuanPage = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  // --- SUBMIT ---
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitError(null);
@@ -175,12 +167,15 @@ const FormPenemuanPage = () => {
 
     setLoading(true);
     const payload = new FormData();
+    
     Object.keys(formData).forEach(key => payload.append(key, formData[key]));
+    
+    payload.append('type', 'found');
+
     if (imageFile) payload.append('item_image', imageFile);
 
     try {
-      // ✅ SUDAH PORT 3000
-      const response = await fetch('http://localhost:3000/api/items/submit', {
+      const response = await fetch('http://localhost:5000/api/reports', {
         method: 'POST',
         body: payload
       });
@@ -194,7 +189,7 @@ const FormPenemuanPage = () => {
       }
     } catch (error) {
       console.error('Error:', error);
-      setSubmitError('❌ Terjadi kesalahan koneksi. Pastikan Backend (Port 3000) menyala.');
+      setSubmitError('❌ Terjadi kesalahan koneksi. Pastikan Backend (Port 5000) menyala.');
       window.scrollTo({ top: 0, behavior: 'smooth' });
     } finally {
       setLoading(false);
@@ -218,7 +213,6 @@ const FormPenemuanPage = () => {
         <div className="form-card">
           <form onSubmit={handleSubmit} noValidate>
 
-            {/* === BODY KARTU (Bagian Atas - Putih) === */}
             <div className="form-card-body">
               
               {submitError && (
@@ -228,7 +222,6 @@ const FormPenemuanPage = () => {
                 </div>
               )}
 
-              {/* Identitas Penemu */}
               <h2 className="form-section-title">Identitas Penemu</h2>
 
               <div className="input-group">
@@ -261,7 +254,6 @@ const FormPenemuanPage = () => {
                 {errors.identification_number && <p className="error-text">{errors.identification_number}</p>}
               </div>
 
-              {/* Data Barang */}
               <h2 className="form-section-title mt-section">Data Barang Temuan</h2>
 
               <div className="input-group">
@@ -298,7 +290,6 @@ const FormPenemuanPage = () => {
                 </div>
               </div>
 
-              {/* Foto Barang */}
               <div className="input-group" id="photo-section">
                 <label className="form-label">Foto Barang<span className="required-star">*</span></label>
                 <div className={`upload-box-modern ${errors.item_image ? 'error-box' : ''}`}>
@@ -324,14 +315,9 @@ const FormPenemuanPage = () => {
               </div>
 
             </div>
-            {/* === AKHIR BODY KARTU === */}
 
-
-            {/* === FOOTER KARTU (Bagian Bawah - Abu-abu) === */}
             <div className="form-footer">
-              
               <h2 className="form-section-title" id="recaptcha-section" style={{ marginTop: 0 }}>Konfirmasi Keamanan</h2>
-              
               <div className="input-group">
                 <div style={{ display: 'inline-block' }}>
                   <ReCAPTCHA sitekey="6LfvKS0sAAAAAMcbAmjk5QulmbPPNvcQkcS1bcGR" onChange={onCaptchaChange} />
@@ -347,15 +333,11 @@ const FormPenemuanPage = () => {
                   {loading ? 'Mengirim...' : 'Laporkan Penemuan'}
                 </button>
               </div>
-
             </div>
-            {/* === AKHIR FOOTER === */}
-
           </form>
         </div>
       </main>
 
-      {/* Modal Sukses */}
       {showSuccessModal && (
         <div className="modal-overlay">
           <div className="modal-content">
@@ -363,14 +345,8 @@ const FormPenemuanPage = () => {
             <h3 className="modal-title">Laporan Terkirim!</h3>
             <p className="modal-text">Data Anda berhasil disimpan.</p>
             <div className="modal-actions">
-              <button onClick={() => navigate('/list')} className="btn-modal-primary">
-                <svg xmlns="http://www.w3.org/2000/svg" style={{width:'20px'}} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" /></svg>
-                Lihat List Barang
-              </button>
-              <button onClick={() => navigate('/')} className="btn-modal-secondary">
-                <svg xmlns="http://www.w3.org/2000/svg" style={{width:'20px'}} fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" d="m2.25 12 8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25" /></svg>
-                Kembali ke Home
-              </button>
+              <button onClick={() => navigate('/list')} className="btn-modal-primary">Lihat List Barang</button>
+              <button onClick={() => navigate('/')} className="btn-modal-secondary">Kembali ke Home</button>
             </div>
           </div>
         </div>

@@ -1,6 +1,6 @@
 import React from "react";
 import { ExclamationTriangleIcon } from "@heroicons/react/24/solid";
-import "./AlertWaspada.css";
+import "../styleUser/AlertWaspada.css";
 
 const AlertWaspada = () => {
   return (

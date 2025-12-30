@@ -29,28 +29,58 @@
 table {
   width: 100%;
   border-collapse: collapse;
+  table-layout: fixed; 
 }
 
 thead {
-  background-color: #ffffff;
+  background-color: #f3f4f6; 
 }
 
 th,
 td {
-  border: 1px solid #1f2937;
+  border: 1px solid #e5e7eb; 
   padding: 12px;
   text-align: left;
   font-size: 14px;
+  vertical-align: top; 
+  word-wrap: break-word; 
 }
 
 th {
   font-weight: 700;
+  color: #111827;
+}
+
+
+th:nth-child(1) {
+  width: 5%;
+  text-align: center;
+}
+td:nth-child(1) {
+  text-align: center;
+}
+
+th:nth-child(2) {
+  width: 20%;
+}
+
+th:nth-child(3) {
+  width: 15%;
+}
+
+th:nth-child(4) {
+  width: 45%; 
+}
+
+th:nth-child(5) {
+  width: 15%;
 }
 
 .category {
   font-size: 12px;
   color: #6b7280;
   margin-top: 4px;
+  font-weight: normal;
 }
 
 tbody tr:hover {

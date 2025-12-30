@@ -1,30 +1,18 @@
 const express = require('express');
 const cors = require('cors');
 const path = require('path');
+const apiRoutes = require('./routes/apiRoutes');
 require('dotenv').config();
 
-const itemRoutes = require('./routes/itemRoutes');
-const foundItemRoutes = require('./routes/foundItemRoutes');
-
 const app = express();
-const port = 3000;
+const PORT = 5000; 
 
 app.use(cors());
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use('/api', apiRoutes);
 
-// Serve Static Images (Uploads)
-app.use('/uploads', express.static(path.join(__dirname, 'public/uploads')));
-
-// Routes
-app.use('/api/items', itemRoutes);
-app.use('/api/found-items', foundItemRoutes);
-app.use('/api/lost-items', lostItemRoutes);
-
-// Test endpoint
-app.get('/', (req, res) => {
-  res.send('Backend Lost & Found UMY berjalan');
-});
-
-app.listen(port, () => {
-  console.log(`Server berjalan di port ${port}`);
+app.listen(PORT, () => {
+  console.log(`Server running on http://localhost:${PORT}`);
 });

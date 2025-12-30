@@ -1,10 +1,9 @@
 import React from "react";
-import Navbar from "../components/Navbar";
-import Footer from "../components/Footer";
-// Pastikan komponen AlertWaspada sudah di-import jika file ini terpisah
-// import AlertWaspada from "../components/AlertWaspada"; 
-import "./ProsedurePage.css";
-import "./HomePage.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AlertWaspada from "./components/AlertWaspada"; 
+import "./styleUser/ProsedurPage.css";
+
 
 export default function ProsedurPage() {
   return (
@@ -12,17 +11,19 @@ export default function ProsedurPage() {
       <Navbar />
       <div className="navbar-spacer" />
 
-      {/* HERO */}
-      <section className="hero">
-        <img
-          src={process.env.PUBLIC_URL + "/images/potoUMY.png"}
-          alt="UMY"
+     <section className="hero-section">
+        <div
+          className="hero-banner"
+          style={{
+            backgroundImage: "url('/images/potoUMY.png')",
+            backgroundSize: "cover",
+            backgroundPosition: "center",
+            backgroundRepeat: "no-repeat",
+          }}
         />
       </section>
 
-      {/* Pembuka Section Content */}
       <section className="content">
-        {/* HEADER */}
         <div className="header-card">
           <h1 className="prosedur-title">
             PROSEDUR LAYANAN LOST & FOUND UMY
@@ -35,9 +36,7 @@ export default function ProsedurPage() {
           </p>
         </div>
 
-        {/* GRID */}
         <div className="grid">
-          {/* ================= KEHILANGAN ================= */}
           <div className="card red">
             <h3 className="card-title">
               <span className="icon red">🔍</span>
@@ -69,7 +68,7 @@ export default function ProsedurPage() {
                     <b> Layanan Mandiri</b>
                   </li>
                   <li>
-                    Pilih <b>Kehilangan Barang</b> dan isi formulir lengkap
+                    Pilih <b>Laporkan Kehilangan</b> dan isi formulir lengkap
                   </li>
                 </ul>
               </div>
@@ -87,9 +86,7 @@ export default function ProsedurPage() {
             </div>
           </div>
 
-          {/* ================= KANAN ================= */}
           <div className="right-col">
-            {/* MENEMUKAN */}
             <div className="card green">
               <h3 className="card-title">
                 <span className="icon green">✔</span>
@@ -100,7 +97,7 @@ export default function ProsedurPage() {
                 <li>
                   <b>Segera Laporkan Penemuan</b><br />
                   Laporkan melalui menu <b>Layanan Mandiri</b> lalu pilih
-                  <b> Menemukan Barang</b>
+                  <b> Laporkan Penemuan</b>
                 </li>
 
                 <li>
@@ -115,16 +112,14 @@ export default function ProsedurPage() {
               </ul>
             </div>
 
-            {/* PENGAMBILAN */}
             <div className="card blue">
               <h3 className="card-title">
                 <span className="icon blue">👤</span>
                 Prosedur Pengambilan Barang
               </h3>
 
-              {/* CARD BIRU MUDA */}
               <div className="info-box">
-                “Barang saya terdata di List Temuan, bagaimana cara mengambilnya?”
+                “Barang saya terdata di List Barang Temuan, bagaimana cara mengambilnya?”
               </div>
 
               <ul className="clean-list">
@@ -135,19 +130,15 @@ export default function ProsedurPage() {
                   Wajib membawa identitas asli
                   <b> KTM / KTP / SIM</b>
                 </li>
-                <li>
-                  Admin mencocokkan ciri barang sebelum serah terima
-                </li>
               </ul>
             </div>
           </div>
         </div>
-
-        <section className="alert-wrapper">
-          <AlertWaspada />
-        </section>
-        
       </section> 
+
+      <section className="alert-wrapper">
+        <AlertWaspada />
+      </section>
 
       <Footer />
     </div>

@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../../AdminDashboard.css';
+import './styleAdmin/AdminDashboard.css';
 
 // Import Komponen Fitur
 import DashboardHome from './components/DashboardHome';

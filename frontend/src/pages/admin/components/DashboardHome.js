@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { motion } from 'framer-motion';
 import { PieChart, Pie, Cell, Tooltip, Legend, ResponsiveContainer, BarChart, Bar, XAxis, YAxis, CartesianGrid } from 'recharts';
-import './DashboardHome.css';
+import '../styleAdmin/DashboardHome.css';
 
 // Ikon (Pastikan Anda sudah install @heroicons/react atau ganti dengan emoji jika belum)
 import { 

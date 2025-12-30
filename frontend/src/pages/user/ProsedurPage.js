@@ -1,8 +1,8 @@
 import React from "react";
-import Navbar from "../../components/Navbar";
-import Footer from "../../../components/Footer";
-import AlertWaspada from "../../components/AlertWaspada"; 
-import "./ProsedurPage.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AlertWaspada from "./components/AlertWaspada"; 
+import "./styleUser/ProsedurPage.css";
 
 
 export default function ProsedurPage() {

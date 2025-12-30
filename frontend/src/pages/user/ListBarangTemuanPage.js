@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import "./ListBarangTemuanPage.css";
-import Navbar from "../../components/Navbar";
-import Footer from "../../../components/Footer";
-import AlertWaspada from '../../components/AlertWaspada'; 
+import "./styleUser/ListBarangTemuanPage.css";
+import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
+import AlertWaspada from './components/AlertWaspada'; 
 
 const getCategoryName = (id) => {
   const catId = String(id);

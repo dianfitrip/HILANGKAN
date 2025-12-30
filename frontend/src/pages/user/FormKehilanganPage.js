@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../../components/Navbar';
-import Footer from '../../../components/Footer';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
 import ReCAPTCHA from "react-google-recaptcha";
-import AlertWaspada from '../../components/AlertWaspada'; 
-import './FormKehilanganPage.css'; 
-
+import AlertWaspada from './components/AlertWaspada'; 
+import './styleUser/FormKehilanganPage.css'; 
 import { CheckCircleIcon } from '@heroicons/react/24/solid';
 import { PhotoIcon } from '@heroicons/react/24/outline';
 

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import { ChevronDown } from "lucide-react";
-import "./Navbar.css";
+import "../styleUser/Navbar.css";
 
 const Navbar = () => {
   const location = useLocation();

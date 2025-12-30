@@ -18,7 +18,7 @@ function App() {
         <Route path="/list" element={<ListBarangTemuanPage />}/>
         <Route path="/lapor-penemuan" element={<FormPenemuanPage />} />
         <Route path="/lapor-kehilangan" element={<FormKehilanganPage />} />
-        <Route path="/admin" element={<AdminDashboard />} />
+        <Route path="/LandFmins" element={<AdminDashboard />} />
       </Routes>
     </Router>
   );
